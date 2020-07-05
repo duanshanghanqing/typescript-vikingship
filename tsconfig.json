@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "allowSyntheticDefaultImports": true, // 允许使用 ES2015 默认的 import 风格
+        "esModuleInterop": true, // 可调用的CommonJS模块必须被做为默认导入，在已有的“老式”模块模式之间保证最佳的互通性
+        "moduleResolution": "node", // 支持node模块化
+        "allowJs": true, // 运行使用js
+        "resolveJsonModule": true, // 支持解析倒入json模块
+    },
+    "include": [
+        "src"
+    ],
+    "compileOnSave": false
+}
