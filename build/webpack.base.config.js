@@ -6,7 +6,8 @@ module.exports = {
         path: path.join(__dirname, '..', 'dist'),
         publicPath: '/',
         // filename: 'js/bundle-[hash].js'
-        filename: 'js/bundle.js'
+        filename: 'js/bundle.js',
+        libraryTarget: 'commonjs2',
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
