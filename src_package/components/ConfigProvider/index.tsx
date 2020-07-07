@@ -1,8 +1,8 @@
 import React from 'react';
-import locale from '../../../../typescript-vikingship/src/locale';
+import { zh_CN } from '../../index';
 
 const config = {
-    locale: locale.zh_CN
+    locale: zh_CN
 };
 
 export const ConfigContext = React.createContext(config);

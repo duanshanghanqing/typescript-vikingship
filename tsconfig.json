@@ -14,7 +14,8 @@
         "resolveJsonModule": true, // 支持解析倒入json模块
     },
     "include": [
-        "src"
+        "src",
+        "src_package"
     ],
     "compileOnSave": false
 }

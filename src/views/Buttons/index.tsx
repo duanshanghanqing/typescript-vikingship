@@ -1,5 +1,6 @@
 import React from 'react';
-import Butten, { ButtonType, ButtonSize } from '../../components/Butten';
+import { Butten } from '../../../src_package/components';
+// import { Butten } from '../../../lib/bundle';
 
 class Buttons extends React.Component {
   constructor(props) {
@@ -13,20 +14,20 @@ class Buttons extends React.Component {
       <div>
         <Butten>Default</Butten>
         <Butten 
-          btnType={ButtonType.Primary} 
-          size={ButtonSize.Middle}
+          btnType="primary"
+          size="ml"
           disabled={true}
         >
             Primary
         </Butten>
         <Butten 
-          btnType={ButtonType.Danger} 
-          size={ButtonSize.Small}
+          btnType="danger"
+          size="sm"
         >
           Danger
         </Butten>
         <Butten 
-          btnType={ButtonType.Link} 
+          btnType="link"
           href="https://blog.csdn.net"
         >
           Link

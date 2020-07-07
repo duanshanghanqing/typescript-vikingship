@@ -15,8 +15,3 @@ export const en = {
         "link": "link",
     }
 }
-
-export default {
-    zh_CN,
-    en
-}

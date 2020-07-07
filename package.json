@@ -8,7 +8,11 @@
     "build:dev": "npm run rm && webpack --config ./build/webpack.dev.config.js",
     "build:prod": "npm run rm && webpack --config ./build/webpack.prod.config.js",
     "rm": "rimraf dist",
-    "lint": "tslint --project tsconfig.json --format codeFrame"
+    "lint": "tslint --project tsconfig.json --format codeFrame",
+    "build_package:dev": "npm run rm_package && webpack --config ./build_package/webpack.dev.config.js",
+    "build_package:prod": "npm run rm_package && webpack --config ./build_package/webpack.prod.config.js",
+    "rm_package": "rimraf lib",
+    "lint_package": "tslint --project tsconfig.json --format codeFrame"
   },
   "keywords": [],
   "author": "",

@@ -4,14 +4,14 @@ import { ConfigContext } from '../ConfigProvider';
 import './index.less';
 
 // 按钮大小
-export enum ButtonSize {
+enum ButtonSize {
     Large = 'lg',
     Middle = 'ml',
     Small = 'sm',
 };
 
 // 按钮类型
-export enum ButtonType {
+enum ButtonType {
     Primary = 'primary',
     Default = 'default',
     Danger = 'danger',
@@ -22,8 +22,8 @@ export enum ButtonType {
 interface BaseButtonProps {
     className?: string;
     disabled?: boolean;
-    size?: ButtonSize;
-    btnType?: ButtonType;
+    size?: string;
+    btnType?: string;
     children: React.ReactChild;
     href?: string;
 };
@@ -74,7 +74,6 @@ Button.defaultProps = {
     disabled: false,
     btnType: ButtonType.Default,
     size: ButtonSize.Large,
-
 };
 
 export default Button;

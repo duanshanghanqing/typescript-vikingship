@@ -4,8 +4,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import configureStore from './store/configureStore';
 import routes from './routes';
-import ConfigProvider from './components/ConfigProvider';
-import { zh_CN } from './locale';
+// import { ConfigProvider } from '../src_package';
+// import { zh_CN } from '../src_package';
+import { ConfigProvider, zh_CN } from '../lib/bundle';
 
 const store = configureStore();
 

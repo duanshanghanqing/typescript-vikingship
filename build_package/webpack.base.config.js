@@ -1,16 +1,20 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: path.join(__dirname, '..', 'src', 'index'),
+    entry: path.join(__dirname, '..', 'src_package', 'index'),
     output: {
-        path: path.join(__dirname, '..', 'dist'),
+        path: path.join(__dirname, '..', 'lib'),
         publicPath: '/',
-        filename: 'js/bundle-[hash].js'
+        filename: 'bundle.js',
+        libraryTarget: 'umd',
+        globalObject: 'this',
+        // libraryExport: 'default',
+        library: 'vik'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
         alias: {
-            '@': path.resolve('./src')
+            '@': path.resolve('./src_package')
         }
     },
     module: {
@@ -31,10 +35,10 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: './index.html'
-        })
-    ]
+    // plugins: [
+    //     new HtmlWebpackPlugin({
+    //         filename: 'index.html',
+    //         template: './index.html'
+    //     })
+    // ]
 };
