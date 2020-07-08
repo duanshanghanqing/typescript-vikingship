@@ -1,6 +1,5 @@
 import React from 'react';
-import { Butten } from '../../../src_package/components';
-// import { Butten } from '../../../lib/bundle';
+import { Butten } from '../../../src_package';
 
 class Buttons extends React.Component {
   constructor(props) {
