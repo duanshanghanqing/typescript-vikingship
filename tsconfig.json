@@ -15,7 +15,7 @@
     },
     "include": [
         "src",
-        "src_package"
+        "src_package", "components", "locale"
     ],
     "compileOnSave": false
 }

@@ -65,8 +65,10 @@ module.exports = merge(webpackbaseconfig, {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: 'css/[name]-[hash].css',
-            chunkFilename: 'css/[id]-[hash].css'
+            // filename: 'css/[name]-[hash].css',
+            // chunkFilename: 'css/[id]-[hash].css'
+            filename: 'css/index.css',
+            chunkFilename: 'css/index.css'
         }),
         new OptimizeCssAssetsPlugin(),
         new webpack.DefinePlugin({

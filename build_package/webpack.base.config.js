@@ -1,15 +1,18 @@
 const path = require('path');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: path.join(__dirname, '..', 'src_package', 'index'),
+    entry: path.join(__dirname, '..', 'src', 'components','index'),
     output: {
         path: path.join(__dirname, '..', 'lib'),
         publicPath: '/',
-        filename: 'bundle.js',
+        filename: 'index.js',
         libraryTarget: 'umd',
         globalObject: 'this',
         // libraryExport: 'default',
         library: 'vik'
+    },
+    externals: {
+        'react': 'react',
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],

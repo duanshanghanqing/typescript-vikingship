@@ -1,4 +1,4 @@
-export const zh_CN = {
+exports.zh_CN = {
     "Butten": {
         "default": "默认",
         "primary": "初级",
@@ -7,7 +7,7 @@ export const zh_CN = {
     }
 }
 
-export const en = {
+exports.en = {
     "Butten": {
         "default": "default",
         "primary": "primary",

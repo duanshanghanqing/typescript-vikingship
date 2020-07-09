@@ -1,5 +1,5 @@
 import React from 'react';
-import { zh_CN } from '../../index';
+import { zh_CN } from '../../../locale';
 
 const config = {
     locale: zh_CN
