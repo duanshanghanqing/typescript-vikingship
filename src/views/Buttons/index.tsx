@@ -12,7 +12,7 @@ class Buttons extends React.Component {
   render() {
     return (
       <div>
-        <Butten>Default</Butten>
+        <Butten autoFocus={true} onClick={() => { alert(111); }}>Default</Butten>
         <Butten 
           btnType="primary"
           size="ml"

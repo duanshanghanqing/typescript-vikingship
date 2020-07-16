@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react';
 import classNames from 'classnames';
 import { ConfigContext } from '../ConfigProvider';
-import './index.less';
+// import './index.less';
+import './index.scss';
 
 // 按钮大小
 enum ButtonSize {
@@ -28,8 +29,15 @@ interface BaseButtonProps {
     href?: string;
 };
 
+// 扩展按钮属性，如 onClick...
+// & ： typeScript 中联合类型，表示两种类型都要。 | 或：两个取其中一个
+// Partial<> : typeScript 中提供，把属性变成可选的
+type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>
+type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>
+type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
+
 // React.FunctionComponent
-const Button: React.FC<BaseButtonProps> = (props) => {
+const Button: FC<ButtonProps> = (props) => {
     const {
         className,
         disabled,
@@ -37,6 +45,7 @@ const Button: React.FC<BaseButtonProps> = (props) => {
         btnType,
         children,
         href,
+        ...restProps
     } = props;
 
     const classes = classNames('vik-btn', {
@@ -50,6 +59,7 @@ const Button: React.FC<BaseButtonProps> = (props) => {
             <a 
                 className={classes}
                 href={href}
+                {...restProps}
             >
                 {children}
             </a>
@@ -63,6 +73,7 @@ const Button: React.FC<BaseButtonProps> = (props) => {
         <button 
             className={classes}
             disabled={disabled}
+            {...restProps}
         >
             {children}-{config.locale.Butten[btnType]}
         </button>
