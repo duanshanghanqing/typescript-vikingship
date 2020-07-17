@@ -1,6 +1,7 @@
 import Root from '../views/Root';
 import Index from '../views/Index';
 import Buttons from '../views/Buttons';
+import Menus from '../views/Menus';
 
 export default [
   {
@@ -15,6 +16,11 @@ export default [
         path: '/buttons',
         exact: true,
         component: Buttons,
+      },
+      {
+        path: '/menus',
+        exact: true,
+        component: Menus,
       },
     ],
   },

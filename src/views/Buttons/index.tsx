@@ -1,6 +1,5 @@
 import React from 'react';
 import { Butten } from '../../components';
-// import { Butten } from '../../../lib';
 
 class Buttons extends React.Component {
   constructor(props) {

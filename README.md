@@ -15,4 +15,8 @@
 
 ## 安装 react 测试框架
 
-    npm install --save-dev @testing-library/react
+    npm i @testing-library/react @testing-library/react-hooks @testing-library/jest-dom -D
+
+    @testing-library/react 测试React Component的库
+    @testing-library/react-hooks 测试自己写的的React Hooks的库
+    @testing-library/jest-dom 提供更多利于dom测试的断言

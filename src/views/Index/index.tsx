@@ -15,6 +15,7 @@ class Index extends React.Component {
           <h3>vik 文档</h3>
           <ul>
             <li><Link to="/buttons">Button</Link></li>
+            <li><Link to="/menus">Menu</Link></li>
           </ul>
       </div>
     );
