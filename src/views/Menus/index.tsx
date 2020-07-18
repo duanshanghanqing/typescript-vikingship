@@ -13,10 +13,10 @@ class Menus extends React.Component {
   render() {
     return (
       <div>
-          <Menu defaultIndex={0}>
-              <Item>1</Item>
-              <Item>2</Item>
-              <Item>3</Item>
+          <Menu defaultIndex={0} onSelect={(index) => { console.log(index); }}>
+              <Item index={0}>1</Item>
+              <Item index={1} disabled={true}>2</Item>
+              <Item index={2}>3</Item>
           </Menu>
       </div>
     );

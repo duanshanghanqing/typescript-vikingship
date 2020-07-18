@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import classNames from 'classnames';
+import { MenuContext } from '../index';
 
 export interface ItemProps {
-    index?: number,
+    index: number,
     disabled?: boolean,
     className?: string,
     style?: React.CSSProperties,
@@ -18,15 +19,28 @@ const Item: FC<ItemProps> = (props) => {
         style,
         children
     } = props;
+    
+    // 得到父组件传递的Context
+    const itemContext = useContext(MenuContext);
 
     const classes = classNames('vik-menuItem', {
         'is-disabled': disabled,
+        'is-active': itemContext.index === index,
     }, className);
+
+    const handleClick = () => {
+        // 并且没有禁用
+        if (typeof itemContext.onSelect === 'function' && !disabled) {
+            // 传递给父组件
+            itemContext.onSelect(index);
+        }
+    }
 
     return (
         <li 
             className={classes} 
             style={style}
+            onClick={handleClick}
         >
             {children}
         </li>

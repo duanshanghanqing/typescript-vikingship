@@ -1,12 +1,12 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import Item from './Item';
 
 // 定义类型
 type MenuMode = 'horizontal' | 'vertical'; // 横向 | 纵向
-type SelectCallback = (selectedIndex: number) => void; // 抽象Callback
+type SelectCallback = (selectedIndex: number) => void; // 抽象Callback 
 
-// 定义属性约束
+// 定义 props 属性约束
 interface IMenuProps {
     defaultIndex?: number;
     className?: string;
@@ -17,21 +17,24 @@ interface IMenuProps {
     children?: React.ReactNode; // 可以传多个内容
 };
 
+// 定义 status 属性约束
+interface IMenuStatus {
+    currentActive: number;
+}
+
+// 定义context约束。Context 要传递的哪些属性
 interface IMenuContext {
     index: number,
     onSelect?: SelectCallback;
 };
 
-
-// 定义实例
-const MenuContext = createContext<IMenuContext>({
+// 定义父 MenuContext实例, 并设置初始默认值
+export const MenuContext = React.createContext<IMenuContext>({
     index: 0,
+    onSelect: () => {},
 });
 
-
-
-
-class Menu extends React.Component<IMenuProps>{
+class Menu extends React.Component<IMenuProps, IMenuStatus>{
     constructor(props) {
         super(props);
         const {
@@ -39,7 +42,7 @@ class Menu extends React.Component<IMenuProps>{
         } = this.props;
 
         this.state = {
-            currentActive: defaultIndex || 0, // 默认选中的值
+            currentActive: defaultIndex, // 默认选中的值
         };
     }
 
@@ -54,10 +57,17 @@ class Menu extends React.Component<IMenuProps>{
 
     }
 
+    public handleClick = (currentActive: number) => {
+        // console.log(currentActive);
+        this.setState({ currentActive });
+        if (typeof this.props.onSelect === 'function') {
+            this.props.onSelect(currentActive);
+        }
+    }
+
     render() {
 
         const {
-            defaultIndex,
             className,
             mode,
             style,
@@ -69,12 +79,24 @@ class Menu extends React.Component<IMenuProps>{
             'vik-menu-vertical': mode === 'vertical',
         }, className);
 
+        const { 
+            currentActive, 
+        } = this.state;
+        
+        // 定义使用 Context 传递的参数
+        const itemContext: IMenuContext = {
+            index: currentActive,
+            onSelect: this.handleClick,
+        }
+
         return (
             <ul
                 className={classes}
                 style={style}
             >
-                {children}
+                <MenuContext.Provider value={itemContext}>
+                    {children}
+                </MenuContext.Provider>
             </ul>
         );
     }
