@@ -1,13 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
 import Item from './Item';
+import './index.scss';
 
 // 定义类型
 type MenuMode = 'horizontal' | 'vertical'; // 横向 | 纵向
 type SelectCallback = (selectedIndex: number) => void; // 抽象Callback 
 
 // 定义 props 属性约束
-interface IMenuProps {
+export interface IMenuProps {
     defaultIndex?: number;
     className?: string;
     mode?: MenuMode;
@@ -18,12 +19,12 @@ interface IMenuProps {
 };
 
 // 定义 status 属性约束
-interface IMenuStatus {
-    currentActive: number;
+export interface IMenuStatus {
+    currentActive: number; // 选中的样式
 }
 
 // 定义context约束。Context 要传递的哪些属性
-interface IMenuContext {
+export interface IMenuContext {
     index: number,
     onSelect?: SelectCallback;
 };
@@ -74,7 +75,7 @@ class Menu extends React.Component<IMenuProps, IMenuStatus>{
             children,
         } = this.props;
 
-        const classes = classNames('vik-menu', {
+        const classes = classNames('viking-menu', {
             'vik-menu-horizontal': mode === 'horizontal',
             'vik-menu-vertical': mode === 'vertical',
         }, className);
@@ -93,6 +94,7 @@ class Menu extends React.Component<IMenuProps, IMenuStatus>{
             <ul
                 className={classes}
                 style={style}
+                data-testid="test-menu"
             >
                 <MenuContext.Provider value={itemContext}>
                     {children}

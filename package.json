@@ -40,6 +40,7 @@
     "file-loader": "^6.0.0",
     "firebase-functions-test": "^0.2.1",
     "html-webpack-plugin": "^4.3.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.1.0",
     "less": "^3.11.3",
     "less-loader": "^6.1.1",

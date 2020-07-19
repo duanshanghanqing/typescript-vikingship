@@ -2,6 +2,7 @@ import React, { FC, useContext } from 'react';
 import classNames from 'classnames';
 import { MenuContext } from '../index';
 
+// 定义属性约束
 export interface ItemProps {
     index: number,
     disabled?: boolean,
@@ -23,7 +24,7 @@ const Item: FC<ItemProps> = (props) => {
     // 得到父组件传递的Context
     const itemContext = useContext(MenuContext);
 
-    const classes = classNames('vik-menuItem', {
+    const classes = classNames('menu-item', {
         'is-disabled': disabled,
         'is-active': itemContext.index === index,
     }, className);

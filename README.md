@@ -20,3 +20,12 @@
     @testing-library/react 测试React Component的库
     @testing-library/react-hooks 测试自己写的的React Hooks的库
     @testing-library/jest-dom 提供更多利于dom测试的断言
+
+    报错
+        http://www.voidcn.com/article/p-mcvcsfwy-bvu.html
+        reactjs – Jest找不到模块FileName.css(映射为identity-obj-proxy)
+
+        安装
+            npm install --save-dev identity-obj-proxy
+            
+    并配置 jest.config.js 文件        
