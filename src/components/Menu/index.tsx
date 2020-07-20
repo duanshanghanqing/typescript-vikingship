@@ -54,10 +54,6 @@ class Menu extends React.Component<IMenuProps, IMenuStatus>{
         mode: 'horizontal',
     }
 
-    componentDidMount() {
-
-    }
-
     public handleClick = (currentActive: number) => {
         // console.log(currentActive);
         this.setState({ currentActive });

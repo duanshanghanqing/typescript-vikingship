@@ -35,22 +35,18 @@ let wrapper: RenderResult,
     disabledElement: HTMLElement;
 
 describe('test Menu and MenuItem component in default(horizontal) mode', () => {
-    // const wrapper = render(<Menu />);
-    // const element = wrapper.queryByText('Test');
-    // expect(element).toBeTruthy();
     // 在每个keys之前都会执行
-    // beforeEach(() => {
-    //     wrapper = render(generateMenu(tetsProps));
-    //     menuElement = wrapper.getByTestId('test-menu');  // 获取 组件
-    //     // wrapper.container.getAttribute('data-testid'); // 原生dom元素 
-    //     activeElement = wrapper.getByText('active'); // 获取选中的item
-    //     disabledElement = wrapper.getByText('disabled'); // 获取禁用的item
-    // });
-
-    it('should render correct Menu and MenuItem based on default props', () => {
-        // expect(menuElement).toBeInTheDocument();
+    beforeEach(() => {
         wrapper = render(generateMenu(tetsProps));
         menuElement = wrapper.getByTestId('test-menu');  // 获取 组件
-        expect(menuElement).toBeInTheDocument();
+        // wrapper.container.getAttribute('data-testid'); // 原生dom元素 
+        activeElement = wrapper.getByText('active'); // 获取选中的item
+        disabledElement = wrapper.getByText('disabled'); // 获取禁用的item
+
+        wrapper2 = render(generateMenu(testVerProps));
+    });
+
+    it('should render correct Menu and MenuItem based on default props', () => {
+        expect(menuElement).toBeTruthy();
     });
 });
