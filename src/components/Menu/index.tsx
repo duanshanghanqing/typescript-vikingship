@@ -18,8 +18,8 @@ export interface IMenuProps {
     children?: React.ReactNode; // 可以传多个内容
 };
 
-// 定义 status 属性约束
-export interface IMenuStatus {
+// 定义 state 属性约束
+export interface IMenuState {
     currentActive: number; // 选中的样式
 }
 
@@ -35,7 +35,7 @@ export const MenuContext = React.createContext<IMenuContext>({
     onSelect: () => {},
 });
 
-class Menu extends React.Component<IMenuProps, IMenuStatus>{
+class Menu extends React.Component<IMenuProps, IMenuState>{
     constructor(props) {
         super(props);
         const {
