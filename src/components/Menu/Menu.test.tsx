@@ -70,7 +70,7 @@ describe('test Menu and MenuItem component in default(horizontal) mode', () => {
     });
 
     it('should render vertical mode when mode is set to vertical', () => {
-        cleanup();
+        cleanup();// 清空之前渲染的dom节点
         wrapper2 = render(generateMenu(testVerProps));
         const menuElement = wrapper2.getByTestId('test-menu');
         expect(menuElement).toHaveClass('viking-menu');
