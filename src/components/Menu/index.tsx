@@ -72,8 +72,8 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
         } = this.props;
 
         const classes = classNames('viking-menu', {
-            'vik-menu-horizontal': mode === 'horizontal',
-            'vik-menu-vertical': mode === 'vertical',
+            'viking-menu-horizontal': mode === 'horizontal',
+            'viking-menu-vertical': mode === 'vertical',
         }, className);
 
         const { 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, RenderResult } from '@testing-library/react';
+import { render, RenderResult, fireEvent, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom'; // https://github.com/testing-library/jest-dom
 import Menu, { IMenuProps } from './index';
 
@@ -15,8 +15,10 @@ const tetsProps: IMenuProps = {
 
 // 定义组件2类型参数
 const testVerProps: IMenuProps = {
-    defaultIndex: 0,
     mode: 'vertical',
+    defaultIndex: 0,
+    onSelect: jest.fn(),
+    className: 'test'
 }
 
 const generateMenu = (props: IMenuProps) => {
@@ -43,14 +45,34 @@ describe('test Menu and MenuItem component in default(horizontal) mode', () => {
         // wrapper.container.getAttribute('data-testid'); // 原生dom元素 
         activeElement = wrapper.getByText('active'); // 获取选中的item
         disabledElement = wrapper.getByText('disabled'); // 获取禁用的item
-
-        wrapper2 = render(generateMenu(testVerProps));
     });
 
+    // 测试属性
     it('should render correct Menu and MenuItem based on default props', () => {
         expect(menuElement).toBeInTheDocument();
         expect(menuElement).toHaveClass('viking-menu');
+        expect(menuElement.getElementsByTagName('li').length).toEqual(3);
         expect(activeElement).toHaveClass('menu-item is-active');
         expect(disabledElement).toHaveClass('menu-item is-disabled');
+    });
+
+    // 测试行为
+    it('should render vertical mode when mode is set to vertical', () => {
+        const thirdItem = wrapper.queryByText('xyz');
+        fireEvent.click(thirdItem);// 触发点击事件
+        expect(thirdItem).toHaveClass('is-active');// 添加class
+        expect(activeElement).not.toHaveClass('is-active');// 判断class是否存在
+        expect(tetsProps.onSelect).toHaveBeenLastCalledWith(2);// 调用 onSelect ，传入参数 2
+
+        fireEvent.click(disabledElement); // 点击被禁用的item
+        expect(disabledElement).not.toHaveClass('is-active');// 没有添加is-active
+        expect(tetsProps.onSelect).not.toHaveBeenLastCalledWith(1);// onSelect ，没有被触发
+    });
+
+    it('should render vertical mode when mode is set to vertical', () => {
+        cleanup();
+        wrapper2 = render(generateMenu(testVerProps));
+        const menuElement = wrapper2.getByTestId('test-menu');
+        expect(menuElement).toHaveClass('viking-menu');
     });
 });
