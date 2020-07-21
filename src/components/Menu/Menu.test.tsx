@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, RenderResult } from '@testing-library/react'
+import { render, RenderResult } from '@testing-library/react';
+import '@testing-library/jest-dom'; // https://github.com/testing-library/jest-dom
 import Menu, { IMenuProps } from './index';
 
 const { Item } = Menu;
@@ -47,6 +48,9 @@ describe('test Menu and MenuItem component in default(horizontal) mode', () => {
     });
 
     it('should render correct Menu and MenuItem based on default props', () => {
-        expect(menuElement).toBeTruthy();
+        expect(menuElement).toBeInTheDocument();
+        expect(menuElement).toHaveClass('viking-menu');
+        expect(activeElement).toHaveClass('menu-item is-active');
+        expect(disabledElement).toHaveClass('menu-item is-disabled');
     });
 });
