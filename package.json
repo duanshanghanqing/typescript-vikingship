@@ -9,7 +9,7 @@
     "build:prod": "npm run rm && webpack --config ./build/webpack.prod.config.js",
     "rm": "rimraf dist",
     "lint": "tslint --project tsconfig.json --format codeFrame",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "keywords": [],
   "author": "",
