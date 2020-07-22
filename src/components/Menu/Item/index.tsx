@@ -4,7 +4,7 @@ import { MenuContext } from '../index';
 
 // 定义属性约束
 export interface ItemProps {
-    index: number,
+    index?: number,
     disabled?: boolean,
     className?: string,
     style?: React.CSSProperties,
@@ -47,5 +47,7 @@ const Item: FC<ItemProps> = (props) => {
         </li>
     );
 }
+
+Item.displayName = 'Item';
 
 export default Item;

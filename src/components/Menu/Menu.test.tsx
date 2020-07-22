@@ -24,9 +24,9 @@ const testVerProps: IMenuProps = {
 const generateMenu = (props: IMenuProps) => {
     return (
         <Menu defaultIndex={props.defaultIndex} mode={props.mode} onSelect={props.onSelect}>
-            <Item index={0}>active</Item>
-            <Item index={1} disabled={true}>disabled</Item>
-            <Item index={2}>xyz</Item>
+            <Item>active</Item>
+            <Item disabled={true}>disabled</Item>
+            <Item>xyz</Item>
         </Menu>
     );
 }
@@ -72,7 +72,7 @@ describe('test Menu and MenuItem component in default(horizontal) mode', () => {
     it('should render vertical mode when mode is set to vertical', () => {
         cleanup();// 清空之前渲染的dom节点
         wrapper2 = render(generateMenu(testVerProps));
-        const menuElement = wrapper2.getByTestId('test-menu');
-        expect(menuElement).toHaveClass('viking-menu');
+        const menuElement = wrapper2.getByTestId('test-menu'); // 获取改原始
+        expect(menuElement).toHaveClass('viking-menu');// 判断viking-menu是否存在
     });
 });

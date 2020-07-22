@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import Item from './Item';
+import Item, { ItemProps } from './Item';
 import './index.scss';
 
 // 定义类型
@@ -86,6 +86,22 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
             onSelect: this.handleClick,
         }
 
+        // 校验传入的 children item 类型必须是一个 displayName === 'Item' 类型
+        const renderChildren = (children) => {
+            return React.Children.map(children, (child, index) => {
+                // 类型断言
+                const childElement = child as React.FunctionComponentElement<ItemProps>;
+                const { displayName } = childElement.type;
+                if (displayName === 'Item') {
+                    // 自动给子组件添加 index 属性，使用React  React.cloneElement() 方法
+                    // 自动添加index
+                    return React.cloneElement(childElement, { index }); 
+                } else {
+                    console.error('waring: Menu has a child whild which is not a MenuItem');
+                }
+            });
+        }
+
         return (
             <ul
                 className={classes}
@@ -93,7 +109,7 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
                 data-testid="test-menu"
             >
                 <MenuContext.Provider value={itemContext}>
-                    {children}
+                    { renderChildren(children) }
                 </MenuContext.Provider>
             </ul>
         );

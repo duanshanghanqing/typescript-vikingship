@@ -14,9 +14,9 @@ class Menus extends React.Component {
     return (
       <div>
         <Menu defaultIndex={0} onSelect={(index) => { console.log(index); }}>
-          <Item index={0}>active</Item>
-          <Item index={1} disabled={true}>disabled</Item>
-          <Item index={2}>xyz</Item>
+          <Item>active</Item>
+          <Item disabled={true}>disabled</Item>
+          <Item>xyz</Item>
         </Menu>
       </div>
     );
