@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import Item, { ItemProps } from './Item';
+import MenuItem, { IMenuItemProps } from './MenuItem';
+import SubMenu from './SubMenu';
 import './index.scss';
 
 // 定义类型
@@ -47,7 +48,9 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
         };
     }
 
-    static Item = Item;
+    static MenuItem = MenuItem;
+
+    static SubMenu = SubMenu;
 
     static defaultProps = {
         defaultIndex: 0,
@@ -72,8 +75,8 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
         } = this.props;
 
         const classes = classNames('viking-menu', {
-            'viking-menu-horizontal': mode === 'horizontal',
-            'viking-menu-vertical': mode === 'vertical',
+            'menu-vertical': mode === 'vertical',
+            'menu-horizontal': mode !== 'vertical',
         }, className);
 
         const { 
@@ -90,9 +93,9 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
         const renderChildren = (children) => {
             return React.Children.map(children, (child, index) => {
                 // 类型断言
-                const childElement = child as React.FunctionComponentElement<ItemProps>;
+                const childElement = child as React.FunctionComponentElement<IMenuItemProps>;
                 const { displayName } = childElement.type;
-                if (displayName === 'Item') {
+                if (displayName === 'MenuItem' || displayName === 'SubMenu') {
                     // 自动给子组件添加 index 属性，使用React  React.cloneElement() 方法
                     // 自动添加index
                     return React.cloneElement(childElement, { index }); 

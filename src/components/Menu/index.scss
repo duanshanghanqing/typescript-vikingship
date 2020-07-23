@@ -70,8 +70,8 @@
     .viking-submenu.menu-opened {
       //display: block;
     }
-}
-.menu-horizontal {
+  }
+  .menu-horizontal {
     >.menu-item {
       border-bottom: $menu-item-active-border-width solid transparent;
     }
@@ -84,8 +84,8 @@
       border: $menu-border-width solid $menu-border-color;
       box-shadow: $submenu-box-shadow;
     }
-}
-.menu-vertical {
+  }
+  .menu-vertical {
     flex-direction: column;
     border-bottom: 0px;
     margin: 10px 20px;

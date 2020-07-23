@@ -3,7 +3,7 @@ import { render, RenderResult, fireEvent, cleanup } from '@testing-library/react
 import '@testing-library/jest-dom'; // https://github.com/testing-library/jest-dom
 import Menu, { IMenuProps } from './index';
 
-const { Item } = Menu;
+const { MenuItem } = Menu;
 
 // 定义组件1类型参数
 const tetsProps: IMenuProps = {
@@ -24,9 +24,9 @@ const testVerProps: IMenuProps = {
 const generateMenu = (props: IMenuProps) => {
     return (
         <Menu defaultIndex={props.defaultIndex} mode={props.mode} onSelect={props.onSelect}>
-            <Item>active</Item>
-            <Item disabled={true}>disabled</Item>
-            <Item>xyz</Item>
+            <MenuItem>active</MenuItem>
+            <MenuItem disabled={true}>disabled</MenuItem>
+            <MenuItem>xyz</MenuItem>
         </Menu>
     );
 }

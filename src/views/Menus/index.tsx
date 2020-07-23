@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from '../../components';
-const { Item } = Menu;
+const { MenuItem, SubMenu } = Menu;
 
 
 class Menus extends React.Component {
@@ -13,10 +13,14 @@ class Menus extends React.Component {
   render() {
     return (
       <div>
-        <Menu defaultIndex={0} onSelect={(index) => { console.log(index); }}>
-          <Item>active</Item>
-          <Item disabled={true}>disabled</Item>
-          <Item>xyz</Item>
+        <Menu defaultIndex={0} onSelect={(index) => { console.log(index); }} mode="vertical">
+          <MenuItem>active</MenuItem>
+          <MenuItem disabled={true}>disabled</MenuItem>
+          <MenuItem>xyz</MenuItem>
+          <SubMenu title="下载">
+            <MenuItem>1</MenuItem>
+            <MenuItem>2</MenuItem>
+          </SubMenu>
         </Menu>
       </div>
     );

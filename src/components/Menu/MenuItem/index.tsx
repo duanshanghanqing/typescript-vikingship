@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { MenuContext } from '../index';
 
 // 定义属性约束
-export interface ItemProps {
+export interface IMenuItemProps {
     index?: number,
     disabled?: boolean,
     className?: string,
@@ -11,7 +11,7 @@ export interface ItemProps {
     children?: React.ReactChild;
 }
 
-const Item: FC<ItemProps> = (props) => {
+const MenuItem: FC<IMenuItemProps> = (props) => {
 
     const {
         index,
@@ -48,6 +48,6 @@ const Item: FC<ItemProps> = (props) => {
     );
 }
 
-Item.displayName = 'Item';
+MenuItem.displayName = 'MenuItem';
 
-export default Item;
+export default MenuItem;
