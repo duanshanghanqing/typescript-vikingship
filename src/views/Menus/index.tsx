@@ -13,13 +13,14 @@ class Menus extends React.Component {
   render() {
     return (
       <div>
-        <Menu defaultIndex={0} onSelect={(index) => { console.log(index); }} mode="vertical">
+        {/* mode="vertical" */}
+        <Menu defaultIndex={0} onSelect={(index) => { console.log(index); }}>
           <MenuItem>active</MenuItem>
           <MenuItem disabled={true}>disabled</MenuItem>
           <MenuItem>xyz</MenuItem>
           <SubMenu title="下载">
-            <MenuItem>1</MenuItem>
-            <MenuItem>2</MenuItem>
+            <MenuItem>下载1</MenuItem>
+            <MenuItem>下载2</MenuItem>
           </SubMenu>
         </Menu>
       </div>

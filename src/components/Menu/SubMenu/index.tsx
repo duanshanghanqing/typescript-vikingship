@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
 import { MenuContext } from '../index';
 import { IMenuItemProps } from '../MenuItem';
@@ -15,6 +15,8 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
 
     // 得到父组件传递的Context
     const itemContext = useContext(MenuContext);
+
+    const [ menuOpen, setMenuOpen ] = useState(false);
 
     const classes = classNames('menu-item submenu-item', {
         'is-active': itemContext.index === index,
@@ -36,15 +38,26 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
                 console.error('waring: Menu has a child whild which is not a MenuItem');
             }
         });
+
+        // 切换下拉菜单显示隐藏
+        const sumMenuClasses = classNames('viking-submenu', {
+            'menu-opened': menuOpen
+        });
         return (
-            <ul className="viking-submenu">
+            <ul className={sumMenuClasses}>
                 { childrenComponent }
             </ul>
         );
     }
+
+    const handleClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        setMenuOpen(!menuOpen);
+    }
+
     return (
         <li key={index} className={classes} style={style}>
-            <div className="submenu-title">{title}</div>
+            <div className="submenu-title" onClick={handleClick}>{title}</div>
             { renderChildren(children) }
         </li>
     );

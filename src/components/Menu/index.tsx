@@ -95,6 +95,7 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
                 // 类型断言
                 const childElement = child as React.FunctionComponentElement<IMenuItemProps>;
                 const { displayName } = childElement.type;
+                // 子元素可能是 MenuItem， 也可能是 SubMenu
                 if (displayName === 'MenuItem' || displayName === 'SubMenu') {
                     // 自动给子组件添加 index 属性，使用React  React.cloneElement() 方法
                     // 自动添加index
