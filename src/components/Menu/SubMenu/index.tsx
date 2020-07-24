@@ -4,7 +4,7 @@ import { MenuContext } from '../index';
 import { IMenuItemProps } from '../MenuItem';
 
 export interface ISubMenuProps {
-    index?: number,
+    index?: string,
     title: string,
     className?: string,
     style?: React.CSSProperties,
@@ -16,7 +16,14 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
     // 得到父组件传递的Context
     const itemContext = useContext(MenuContext);
 
-    const [ menuOpen, setMenuOpen ] = useState(false);
+    // 需求：只有纵向才默认展开
+    const openSubMenus = itemContext.defaultOpenSubMenus as Array<string>; // 可能是 undefined,这里使用类型断言转换
+    // 设置初始化默认展开状态，读取用户配置
+    let isOpen = false;
+    if (itemContext.mode === 'vertical' && openSubMenus.includes(index)) {
+        isOpen = true;
+    }
+    const [ menuOpen, setMenuOpen ] = useState(isOpen);// 定义展开合并的状态
 
     const classes = classNames('menu-item submenu-item', {
         'is-active': itemContext.index === index,
@@ -26,14 +33,14 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
     // 校验传入的 children item 类型必须是一个 displayName === 'Item' 类型
     const renderChildren = (children) => {
         // 使用 React 提供的Children map 遍历
-        const childrenComponent = React.Children.map(children, (child, index) => {
+        const childrenComponent = React.Children.map(children, (child, i) => {
             // 类型断言
             const childElement = child as React.FunctionComponentElement<IMenuItemProps>;
             const { displayName } = childElement.type;
             if (displayName === 'MenuItem') {
                 // 自动给子组件添加 index 属性，使用React  React.cloneElement() 方法
                 // 自动添加index
-                return React.cloneElement(childElement, { index }); 
+                return React.cloneElement(childElement, { index: `${index.toString()}-${i}` }); // 使用父组件的索引加子组件的索引
             } else {
                 console.error('waring: Menu has a child whild which is not a MenuItem');
             }
@@ -50,14 +57,37 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
         );
     }
 
+    // 点击title展开
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault();
         setMenuOpen(!menuOpen);
     }
+    // 鼠标悬停显示和隐藏
+    let timer: any;
+    const handleMouse = (e: React.MouseEvent, toggle: boolean) => {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        e.preventDefault();
+        timer = setTimeout(() => {
+            setMenuOpen(toggle);
+        }, 100);
+    }
+    
+    // 纵向使用点击事件， 横行使用鼠标悬停事件
+    // 1.点击事件
+    const clickEvent = itemContext.mode === 'vertical' ? {
+        onClick: handleClick,
+    } : {};
+    // 2.悬停事件
+    const hoveEvent = itemContext.mode !== 'vertical' ? {
+        onMouseEnter: (e: React.MouseEvent) => { handleMouse(e, true) },
+        onMouseLeave: (e: React.MouseEvent) => { handleMouse(e, false) },
+    } : {};
 
     return (
-        <li key={index} className={classes} style={style}>
-            <div className="submenu-title" onClick={handleClick}>{title}</div>
+        <li key={index} className={classes} style={style} {...hoveEvent}>
+            <div className="submenu-title" { ...clickEvent }>{title}</div>
             { renderChildren(children) }
         </li>
     );

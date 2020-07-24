@@ -4,7 +4,7 @@ import { MenuContext } from '../index';
 
 // 定义属性约束
 export interface IMenuItemProps {
-    index?: number,
+    index?: string,
     disabled?: boolean,
     className?: string,
     style?: React.CSSProperties,

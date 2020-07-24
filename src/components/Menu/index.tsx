@@ -6,33 +6,36 @@ import './index.scss';
 
 // 定义类型
 type MenuMode = 'horizontal' | 'vertical'; // 横向 | 纵向
-type SelectCallback = (selectedIndex: number) => void; // 抽象Callback 
+type SelectCallback = (selectedIndex: string) => void; // 抽象Callback 
 
 // 定义 props 属性约束
 export interface IMenuProps {
-    defaultIndex?: number;
+    defaultIndex?: string;
     className?: string;
     mode?: MenuMode;
     style?: React.CSSProperties;
     onSelect?: SelectCallback;
     // children?: React.ReactChild;
     children?: React.ReactNode; // 可以传多个内容
+    defaultOpenSubMenus?: string[], // 默认展开
 };
 
 // 定义 state 属性约束
 export interface IMenuState {
-    currentActive: number; // 选中的样式
+    currentActive: string; // 选中的样式
 }
 
 // 定义context约束。Context 要传递的哪些属性
 export interface IMenuContext {
-    index: number,
-    onSelect?: SelectCallback;
+    index: string,
+    onSelect?: SelectCallback,
+    mode?: MenuMode;
+    defaultOpenSubMenus?: string[], // 默认展开，向下传递
 };
 
 // 定义父 MenuContext实例, 并设置初始默认值
 export const MenuContext = React.createContext<IMenuContext>({
-    index: 0,
+    index: '0',
     onSelect: () => {},
 });
 
@@ -53,11 +56,12 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
     static SubMenu = SubMenu;
 
     static defaultProps = {
-        defaultIndex: 0,
+        defaultIndex: '0',
         mode: 'horizontal',
+        defaultOpenSubMenus: [],
     }
 
-    public handleClick = (currentActive: number) => {
+    public handleClick = (currentActive: string) => {
         // console.log(currentActive);
         this.setState({ currentActive });
         if (typeof this.props.onSelect === 'function') {
@@ -72,6 +76,7 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
             mode,
             style,
             children,
+            defaultOpenSubMenus
         } = this.props;
 
         const classes = classNames('viking-menu', {
@@ -87,6 +92,8 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
         const itemContext: IMenuContext = {
             index: currentActive,
             onSelect: this.handleClick,
+            mode,
+            defaultOpenSubMenus,
         }
 
         // 校验传入的 children item 类型必须是一个 displayName === 'Item' 类型
@@ -99,7 +106,7 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
                 if (displayName === 'MenuItem' || displayName === 'SubMenu') {
                     // 自动给子组件添加 index 属性，使用React  React.cloneElement() 方法
                     // 自动添加index
-                    return React.cloneElement(childElement, { index }); 
+                    return React.cloneElement(childElement, { index: index.toString() }); 
                 } else {
                     console.error('waring: Menu has a child whild which is not a MenuItem');
                 }
