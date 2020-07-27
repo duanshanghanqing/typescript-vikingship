@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import './index.scss';
 
 class Index extends React.Component {
@@ -12,10 +14,11 @@ class Index extends React.Component {
   render() {
     return (
       <div className="index">
-          <h3>vik 文档</h3>
+          <h3><FontAwesomeIcon icon={faCoffee} /> vik 文档</h3>
           <ul>
             <li><Link to="/buttons">Button</Link></li>
             <li><Link to="/menus">Menu</Link></li>
+            <li><Link to="/icon">icon</Link></li>
           </ul>
       </div>
     );

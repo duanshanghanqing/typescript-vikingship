@@ -29,3 +29,11 @@
             npm install --save-dev identity-obj-proxy
             
     并配置 jest.config.js 文件        
+
+## 安装字体图标
+    https://github.com/FortAwesome/react-fontawesome
+
+    npm i --save @fortawesome/fontawesome-svg-core \
+             @fortawesome/free-solid-svg-icons \
+             @fortawesome/react-fontawesome
+    
