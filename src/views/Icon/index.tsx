@@ -11,7 +11,11 @@ class _Icon extends React.Component {
   render() {
     return (
         <div>
-            <Icon icon="coffee" theme="danger" />
+            <Icon icon="coffee" theme="primary" size="1x"/>
+            <Icon icon="coffee" theme="primary" size="2x"/>
+            <Icon icon="coffee" theme="primary" size="3x"/>
+            <Icon icon="coffee" theme="primary" size="4x"/>
+            <Icon icon="coffee" theme="primary" size="5x"/>
         </div>
     );
   }

@@ -1,0 +1,8 @@
+@import '../styles/index.scss';
+
+// scss 提供的循环变量，得到key，value
+@each $key, $val in $theme-colors {
+    .icon-#{$key} {
+      color: $val;
+    }
+  }

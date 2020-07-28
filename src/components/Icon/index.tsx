@@ -4,6 +4,7 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontaw
 import { library } from '@fortawesome/fontawesome-svg-core'
 // import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons'; // 全部图标
+import './index.scss';
 
 // library.add(faCheckSquare, faCoffee); // 把多个图标提前准备好
 library.add(fas); // 全部图标

@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
 import { MenuContext } from '../index';
 import { IMenuItemProps } from '../MenuItem';
+import { Icon } from '../../../components';
+import { CSSTransition } from 'react-transition-group';
+import './index.scss';
 
 export interface ISubMenuProps {
     index?: string,
@@ -23,10 +26,12 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
     if (itemContext.mode === 'vertical' && openSubMenus.includes(index)) {
         isOpen = true;
     }
-    const [ menuOpen, setMenuOpen ] = useState(isOpen);// 定义展开合并的状态
+    const [menuOpen, setMenuOpen] = useState(isOpen);// 定义展开合并的状态
 
     const classes = classNames('menu-item submenu-item', {
-        'is-active': itemContext.index === index,
+        'is-active': itemContext.index === index,// 选中样式
+        'is-opened': menuOpen, // 打开样式
+        'is-vertical': itemContext.mode === 'vertical',
     }, className);
 
 
@@ -51,9 +56,20 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
             'menu-opened': menuOpen
         });
         return (
-            <ul className={sumMenuClasses}>
-                { childrenComponent }
-            </ul>
+            <CSSTransition 
+                // 从无到有，是否打开
+                in={menuOpen}
+                // 延迟100毫秒执行
+                timeout={100}
+                // 自定义名称
+                classNames="zoom-in-top"
+                // 第一次执行也会运行动画过程
+                appear={true}
+            >
+                <ul className={sumMenuClasses}>
+                    {childrenComponent}
+                </ul>
+            </CSSTransition>
         );
     }
 
@@ -73,7 +89,7 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
             setMenuOpen(toggle);
         }, 100);
     }
-    
+
     // 纵向使用点击事件， 横行使用鼠标悬停事件
     // 1.点击事件
     const clickEvent = itemContext.mode === 'vertical' ? {
@@ -87,8 +103,11 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
 
     return (
         <li key={index} className={classes} style={style} {...hoveEvent}>
-            <div className="submenu-title" { ...clickEvent }>{title}</div>
-            { renderChildren(children) }
+            <div className="submenu-title" {...clickEvent}>
+                {title}
+                <Icon icon="angle-down" size="1x" className="arrow-icon" />
+            </div>
+            {renderChildren(children)}
         </li>
     );
 }

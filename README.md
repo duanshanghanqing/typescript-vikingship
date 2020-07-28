@@ -31,9 +31,12 @@
     并配置 jest.config.js 文件        
 
 ## 安装字体图标
+    http://www.fontawesome.com.cn/faicons/
     https://github.com/FortAwesome/react-fontawesome
 
     npm i --save @fortawesome/fontawesome-svg-core \
              @fortawesome/free-solid-svg-icons \
              @fortawesome/react-fontawesome
     
+## 安装动画库
+    npm i react-transition-group @types/react-transition-group -S
