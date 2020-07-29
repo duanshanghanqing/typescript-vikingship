@@ -3,6 +3,7 @@ import Index from '../views/Index';
 import Buttons from '../views/Buttons';
 import Menus from '../views/Menus';
 import Icon from '../views/Icon';
+import Transition from '../views/Transition';
 
 export default [
   {
@@ -27,6 +28,11 @@ export default [
         path: '/icon',
         exact: true,
         component: Icon,
+      },
+      {
+        path: '/transition',
+        exact: true,
+        component: Transition,
       },
     ],
   },

@@ -39,4 +39,5 @@
              @fortawesome/react-fontawesome
     
 ## 安装动画库
+    https://reactjs.org/docs/animation.html
     npm i react-transition-group @types/react-transition-group -S

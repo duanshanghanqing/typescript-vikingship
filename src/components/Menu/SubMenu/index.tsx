@@ -3,8 +3,10 @@ import classNames from 'classnames';
 import { MenuContext } from '../index';
 import { IMenuItemProps } from '../MenuItem';
 import { Icon } from '../../../components';
-import { CSSTransition } from 'react-transition-group';
-import './index.scss';
+// import { CSSTransition } from 'react-transition-group';
+// import './index.scss';
+// 修改为如下
+import Transition from '../../Transition';
 
 export interface ISubMenuProps {
     index?: string,
@@ -55,9 +57,10 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
         const sumMenuClasses = classNames('viking-submenu', {
             'menu-opened': menuOpen
         });
+        /*
         return (
             <CSSTransition 
-                // 从无到有，是否打开
+                // 从无到有，是否打开。进入true，离开false
                 in={menuOpen}
                 // 延迟100毫秒执行
                 timeout={100}
@@ -65,12 +68,27 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
                 classNames="zoom-in-top"
                 // 第一次执行也会运行动画过程
                 appear={true}
+                // 默认没有子dom节点，输入进入添加dom节点，鼠标离开移除dom节点
+                unmountOnExit={true}
             >
                 <ul className={sumMenuClasses}>
                     {childrenComponent}
                 </ul>
             </CSSTransition>
         );
+        */
+       return (
+            <Transition
+                in={menuOpen}
+                // 延迟100毫秒执行
+                timeout={100}
+                animation="zoom-in-bottom"
+            >
+                <ul className={sumMenuClasses}>
+                    {childrenComponent}
+                </ul>
+            </Transition>
+       );
     }
 
     // 点击title展开

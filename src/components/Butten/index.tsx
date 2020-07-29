@@ -5,19 +5,21 @@ import { ConfigContext } from '../ConfigProvider';
 import './index.scss';
 
 // 按钮大小
-enum ButtonSize {
-    Large = 'lg',
-    Middle = 'ml',
-    Small = 'sm',
-};
+// enum ButtonSize {
+//     Large = 'lg',
+//     Middle = 'ml',
+//     Small = 'sm',
+// };
+export type ButtonSize = 'lg' | 'ml' | 'sm';
 
 // 按钮类型
-enum ButtonType {
-    Primary = 'primary',
-    Default = 'default',
-    Danger = 'danger',
-    Link = 'link',
-};
+// enum ButtonType {
+//     Primary = 'primary',
+//     Default = 'default',
+//     Danger = 'danger',
+//     Link = 'link',
+// };
+export type ButtonType = 'primary' | 'default' | 'danger' | 'link';
 
 // 定义组件属性
 interface BaseButtonProps {
@@ -51,10 +53,10 @@ const Button: FC<ButtonProps> = (props) => {
     const classes = classNames('vik-btn', {
         [`vik-btn-${btnType}`]: !!btnType,
         [`vik-btn-${size}`]: !!size,
-        'vik-disabled': (btnType === ButtonType.Link) && disabled
+        'vik-disabled': (btnType === 'link') && disabled
     }, className);
 
-    if (btnType === ButtonType.Link && href) {
+    if (btnType === 'link' && href) {
         return (
             <a 
                 className={classes}
@@ -75,7 +77,8 @@ const Button: FC<ButtonProps> = (props) => {
             disabled={disabled}
             {...restProps}
         >
-            {children}-{config.locale.Butten[btnType]}
+            {/* {children}-{config.locale.Butten[btnType]} */}
+            {children}
         </button>
     );
 };
@@ -83,8 +86,8 @@ const Button: FC<ButtonProps> = (props) => {
 // 默认属性
 Button.defaultProps = {
     disabled: false,
-    btnType: ButtonType.Default,
-    size: ButtonSize.Large,
+    btnType: 'Default',
+    size: 'large',
 };
 
 export default Button;
