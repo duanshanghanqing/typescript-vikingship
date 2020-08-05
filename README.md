@@ -41,3 +41,31 @@
 ## 安装动画库
     https://reactjs.org/docs/animation.html
     npm i react-transition-group @types/react-transition-group -S
+
+# 安装  storybook,用于查看我们写好的组件
+    https://storybook.js.org/docs/guides/guide-react/
+
+    npx -p @storybook/cli sb init
+
+    支持ts配置
+        https://storybook.js.org/docs/configurations/typescript-config/
+        main.js
+            module.exports = {
+                stories: ['../stories/**/*.stories.tsx'],
+                webpackFinal: async config => {
+                    config.module.rules.push({
+                    test: /\.(ts|tsx)$/,
+                    use: [
+                        {
+                        loader: require.resolve('ts-loader'),
+                        },
+                        // Optional
+                        {
+                        loader: require.resolve('react-docgen-typescript-loader'),
+                        },
+                    ],
+                    });
+                    config.resolve.extensions.push('.ts', '.tsx');
+                    return config;
+                },
+            };
