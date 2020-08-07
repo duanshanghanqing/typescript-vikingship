@@ -69,3 +69,9 @@
                     return config;
                 },
             };
+
+# 安装  @storybook/addon-info 插件,用于展示组件的使用文档源码
+
+    https://github.com/storybookjs/storybook/tree/master/addons/info
+    https://developer.aliyun.com/mirror/npm/package/@types/storybook__addon-info
+    npm i -D @storybook/addon-info @types/storybook__addon-info -D
