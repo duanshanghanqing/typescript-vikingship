@@ -1,5 +1,5 @@
 import React from 'react';
-import { Butten, Transition } from '../../components';
+import { Button, Transition } from '../../components';
 
 interface Iprops {
 }
@@ -23,7 +23,7 @@ class Index extends React.Component<Iprops, Istate> {
         return (
             <div className="index">
                 <div>
-                    <Butten onClick={() => { this.setState({ showLeft: !showLeft }) }}>切换动画-zoom-in-left</Butten>
+                    <Button onClick={() => { this.setState({ showLeft: !showLeft }) }}>切换动画-zoom-in-left</Button>
                     <Transition
                         in={showLeft}
                         timeout={300}
@@ -40,7 +40,7 @@ class Index extends React.Component<Iprops, Istate> {
                     </Transition>
                 </div>
                 <div>
-                    <Butten onClick={() => { this.setState({ showTop: !showTop }) }}>切换动画-zoom-in-top</Butten>
+                    <Button onClick={() => { this.setState({ showTop: !showTop }) }}>切换动画-zoom-in-top</Button>
                     <Transition
                         in={showTop}
                         timeout={300}

@@ -9,21 +9,15 @@
 // };
 
 // https://storybook.js.org/docs/configurations/typescript-config/
+const dev_webpack = require('../build/webpack.dev.config');
+
 module.exports = {
-  stories: ['../stories/**/*.stories.tsx'],
+  stories: ['../stories/**/*.stories.tsx', '../src/**/*.scss'],
   webpackFinal: async config => {
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      use: [
-        {
-          loader: require.resolve('ts-loader'),
-        },
-        // Optional
-        {
-          loader: require.resolve('react-docgen-typescript-loader'),
-        },
-      ],
-    });
+    config.module.rules = [
+      ...config.module.rules,
+      ...dev_webpack.module.rules,
+    ];
     config.resolve.extensions.push('.ts', '.tsx');
     return config;
   },

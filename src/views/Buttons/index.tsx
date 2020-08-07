@@ -1,5 +1,5 @@
 import React from 'react';
-import { Butten } from '../../components';
+import { Button } from '../../components';
 
 class Buttons extends React.Component {
   constructor(props) {
@@ -11,26 +11,26 @@ class Buttons extends React.Component {
   render() {
     return (
       <div>
-        <Butten autoFocus={true} onClick={() => { alert(111); }}>Default</Butten>
-        <Butten 
+        <Button autoFocus={true} onClick={() => { alert(111); }}>Default</Button>
+        <Button 
           btnType="primary"
           size="ml"
           disabled={true}
         >
             Primary
-        </Butten>
-        <Butten 
+        </Button>
+        <Button 
           btnType="danger"
           size="sm"
         >
           Danger
-        </Butten>
-        <Butten 
+        </Button>
+        <Button 
           btnType="link"
           href="https://blog.csdn.net"
         >
           Link
-        </Butten>
+        </Button>
       </div>
     );
   }

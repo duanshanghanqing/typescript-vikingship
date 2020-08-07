@@ -69,7 +69,6 @@ const Button: FC<ButtonProps> = (props) => {
     }
 
     const config = useContext(ConfigContext);
-    // console.log(config.locale.Butten);
 
     return (
         <button 
@@ -77,7 +76,6 @@ const Button: FC<ButtonProps> = (props) => {
             disabled={disabled}
             {...restProps}
         >
-            {/* {children}-{config.locale.Butten[btnType]} */}
             {children}
         </button>
     );

@@ -1,2 +1,6 @@
 @import '../styles/index.scss';
-@import './animation';
+// 调用方法
+@include zoom-animation('top', scaleY(0), scaleY(1), center top);
+@include zoom-animation('left', scaleY(.45, .45), scaleY(1), top left);
+@include zoom-animation('right', scaleY(.45, .45), scaleY(1), center right);
+@include zoom-animation('bottom', scaleY(0), scaleY(1), center bottom);
