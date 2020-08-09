@@ -1,13 +1,10 @@
-import React from 'react';
 import { addDecorator } from '@storybook/react';
+import React from 'react';
 
-// 添加全局装饰
-// https://storybook.js.org/docs/addons/introduction/
-
+// 定义内容居中的组件
 const styles = {
     textAlign: 'center',
 };
 const Center = ({ children }) => <div style={styles}>{children}</div>;
 
-// 创建居中指令，并添加到全局指令中
 addDecorator(storyFn => <Center>{storyFn()}</Center>);

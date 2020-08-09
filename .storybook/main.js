@@ -8,18 +8,29 @@
 //   },
 // };
 
-// https://storybook.js.org/docs/configurations/typescript-config/
-const webpack_dev_config = require('../build/webpack.dev.config');
 
 module.exports = {
-  stories: ['../stories/**/*.stories.tsx', '../src/**/*.scss'],// 配置入口
-  addons: ['@storybook/addon-actions', '@storybook/addon-links'],// 配置使用的插件
+  stories: ['../stories/**/*.stories.tsx', '../src/**/*.scss'],
+  addons: ['@storybook/addon-actions', '@storybook/addon-links'],
   webpackFinal: async config => {
-    config.module.rules = [
-      ...config.module.rules,
-      ...webpack_dev_config.module.rules,
-    ];
-    config.resolve.extensions = webpack_dev_config.resolve.extensions;
+    // do mutation to the config
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      use: [
+        {
+          loader: require.resolve('ts-loader'),
+        },
+        // Optional
+        {
+          loader: require.resolve('react-docgen-typescript-loader'),
+        },
+      ],
+    });
+    config.module.rules.push({
+      test: /\.scss$/,
+      use: ['style-loader', 'css-loader', 'sass-loader'],
+    });
+    config.resolve.extensions.push('.ts', '.tsx');
     return config;
   },
 };

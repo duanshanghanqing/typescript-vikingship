@@ -47,23 +47,29 @@
 
     npx -p @storybook/cli sb init
 
-    支持ts配置
+    支持ts,tsx配置
         https://storybook.js.org/docs/configurations/typescript-config/
         main.js
             module.exports = {
-                stories: ['../stories/**/*.stories.tsx'],
+                stories: ['../stories/**/*.stories.tsx', '../src/**/*.scss'],
+                addons: ['@storybook/addon-actions', '@storybook/addon-links'],
                 webpackFinal: async config => {
+                    // do mutation to the config
                     config.module.rules.push({
-                    test: /\.(ts|tsx)$/,
-                    use: [
-                        {
-                        loader: require.resolve('ts-loader'),
-                        },
-                        // Optional
-                        {
-                        loader: require.resolve('react-docgen-typescript-loader'),
-                        },
-                    ],
+                        test: /\.(ts|tsx)$/,
+                        use: [
+                            {
+                                loader: require.resolve('ts-loader'),
+                            },
+                            // Optional
+                            {
+                                loader: require.resolve('react-docgen-typescript-loader'),
+                            },
+                        ],
+                    });
+                    config.module.rules.push({
+                        test: /\.scss$/,
+                        use: ['style-loader', 'css-loader', 'sass-loader'],
                     });
                     config.resolve.extensions.push('.ts', '.tsx');
                     return config;
@@ -75,3 +81,30 @@
     https://github.com/storybookjs/storybook/tree/master/addons/info
     https://developer.aliyun.com/mirror/npm/package/@types/storybook__addon-info
     npm i -D @storybook/addon-info @types/storybook__addon-info -D
+
+    stories/Button.stories.tsx
+        import React from 'react';
+        import { withInfo } from '@storybook/addon-info';
+        import { action } from '@storybook/addon-actions';
+        import { Button } from '@storybook/react/demo';
+
+        export default {
+            title: 'Button',
+            component: Button,
+            decorators: [withInfo],
+        };
+
+        export const Text = () => <Button onClick={action('clicked')}>Hello Button</Button>;
+
+        export const Emoji = () => (
+        <Button onClick={action('clicked')}>
+            <span role="img" aria-label="so cool">
+            😀 😎 👍 💯
+            </span>
+        </Button>
+        );
+
+        Emoji.story = {
+            name: 'with emoji',
+        };
+
