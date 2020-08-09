@@ -24,6 +24,16 @@ module.exports = {
         // Optional
         {
           loader: require.resolve('react-docgen-typescript-loader'),
+          options: {
+            shouldExtractLiteralValuesFromEnum: true, // 枚举联合类型不显示
+            propFilter: (prop, component) => {
+              if (prop.parent) {
+                return !prop.parent.fileName.includes("node_modules");
+              }
+
+              return true;
+            },
+          }
         },
       ],
     });

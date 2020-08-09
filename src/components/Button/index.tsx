@@ -22,10 +22,13 @@ export type ButtonSize = 'lg' | 'ml' | 'sm';
 export type ButtonType = 'primary' | 'default' | 'danger' | 'link';
 
 // 定义组件属性
-interface BaseButtonProps {
+export interface BaseButtonProps {
     className?: string;
+    /**设置 Button 是否禁用*/
     disabled?: boolean;
+    /**设置 Button 大小*/
     size?: string;
+    /**设置 Button 类型*/
     btnType?: string;
     children: React.ReactChild;
     href?: string;
@@ -38,8 +41,10 @@ type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>
 type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>
 type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
-// React.FunctionComponent
-const Button: FC<ButtonProps> = (props) => {
+/**
+ * 这是我们的一个Button组件
+ */
+export const Button: FC<ButtonProps> = (props) => {
     const {
         className,
         disabled,
@@ -84,7 +89,7 @@ const Button: FC<ButtonProps> = (props) => {
 // 默认属性
 Button.defaultProps = {
     disabled: false,
-    btnType: 'Default',
+    btnType: 'default',
     size: 'large',
 };
 

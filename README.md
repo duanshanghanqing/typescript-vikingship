@@ -49,7 +49,7 @@
 
     支持ts,tsx配置
         https://storybook.js.org/docs/configurations/typescript-config/
-        main.js
+        .storybook/main.js
             module.exports = {
                 stories: ['../stories/**/*.stories.tsx', '../src/**/*.scss'],
                 addons: ['@storybook/addon-actions', '@storybook/addon-links'],
@@ -61,10 +61,6 @@
                             {
                                 loader: require.resolve('ts-loader'),
                             },
-                            // Optional
-                            {
-                                loader: require.resolve('react-docgen-typescript-loader'),
-                            },
                         ],
                     });
                     config.module.rules.push({
@@ -75,6 +71,33 @@
                     return config;
                 },
             };
+
+    配置全局的修饰器    
+        .storybook/preview.js
+            import { addDecorator } from '@storybook/react';
+            import React from 'react';
+
+            定义内容居中的组件
+            const styles = {
+                textAlign: 'center',
+            };
+            const Center = ({ children }) => <div style={styles}>{children}</div>;
+
+            addDecorator(storyFn => <Center>{storyFn()}</Center>);
+
+    配置全局的修饰器
+        stories/1-Button.stories.tsx
+            import Button from './button';
+            import Center from './center';
+
+            export default {
+            title: 'Button',
+                decorators: [storyFn => <Center>{storyFn()}</Center>],
+            };
+
+            export const defaultView = () => (
+                <Button>Hello Button</Button>
+            );
 
 # 安装  @storybook/addon-info 插件,用于展示组件的使用文档源码
 
@@ -108,3 +131,17 @@
             name: 'with emoji',
         };
 
+## 添加自动生成文档 
+    
+    https://github.com/reactjs/react-docgen
+
+    支持typescript
+    https://github.com/strothj/react-docgen-typescript-loader
+    
+        npm install --save-dev react-docgen-typescript-loader
+
+        要想使用这个库，组件必须要使用这样的导出，才能分析的出来
+        import React, { useContext, FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react';
+
+        组件也要这样导出
+        export const Button: FC<ButtonProps> = (props) => {
