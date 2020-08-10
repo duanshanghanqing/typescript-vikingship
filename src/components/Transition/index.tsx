@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { CSSTransitionProps } from 'react-transition-group/CSSTransition';
 import './index.scss';
@@ -10,7 +10,7 @@ type TransitionProps = CSSTransitionProps & {
     wrapper? : boolean,
 }
 
-const Transition: React.FC<TransitionProps> = (props) => {
+const Transition: FC<TransitionProps> = (props) => {
     const {
         children,
         classNames,
