@@ -13,20 +13,20 @@ class Buttons extends React.Component {
       <div>
         <Button autoFocus={true} onClick={() => { alert(111); }}>Default</Button>
         <Button 
-          btnType="primary"
-          size="ml"
+          buttonType="primary"
+          buttonSize="ml"
           disabled={true}
         >
             Primary
         </Button>
         <Button 
-          btnType="danger"
-          size="sm"
+          buttonType="danger"
+          buttonSize="sm"
         >
           Danger
         </Button>
         <Button 
-          btnType="link"
+          buttonType="link"
           href="https://blog.csdn.net"
         >
           Link
