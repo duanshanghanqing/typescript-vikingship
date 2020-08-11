@@ -18,5 +18,6 @@ const StoryWrapper = ({ children }) => (
         {children}
     </div>
 );
+// 添加全局修饰器
 addDecorator(storyFn => <StoryWrapper>{storyFn()}</StoryWrapper>);
 
