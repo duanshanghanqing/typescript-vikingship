@@ -5,21 +5,21 @@ import { ConfigContext } from '../ConfigProvider';
 import './index.scss';
 
 // 按钮大小
-// enum ButtonSize {
+// enum buttonSize {
 //     Large = 'lg',
 //     Middle = 'ml',
 //     Small = 'sm',
 // };
-export type ButtonSize = 'lg' | 'ml' | 'sm';
+export type buttonSize = 'lg' | 'ml' | 'sm';
 
 // 按钮类型
-// enum ButtonType {
+// enum buttonType {
 //     Primary = 'primary',
 //     Default = 'default',
 //     Danger = 'danger',
 //     Link = 'link',
 // };
-export type ButtonType = 'primary' | 'default' | 'danger' | 'link';
+export type buttonType = 'primary' | 'default' | 'danger' | 'link';
 
 // 定义组件属性
 export interface BaseButtonProps {
@@ -27,9 +27,9 @@ export interface BaseButtonProps {
     /**设置 Button 是否禁用*/
     disabled?: boolean;
     /**设置 Button 大小*/
-    size?: string;
+    buttonSize?: buttonSize;
     /**设置 Button 类型*/
-    btnType?: string;
+    buttonType?: buttonType;
     children: React.ReactChild;
     href?: string;
 };
@@ -48,20 +48,20 @@ export const Button: FC<ButtonProps> = (props) => {
     const {
         className,
         disabled,
-        size,
-        btnType,
+        buttonSize,
+        buttonType,
         children,
         href,
         ...restProps
     } = props;
 
     const classes = classNames('vik-btn', {
-        [`vik-btn-${btnType}`]: !!btnType,
-        [`vik-btn-${size}`]: !!size,
-        'vik-disabled': (btnType === 'link') && disabled
+        [`vik-btn-${buttonType}`]: !!buttonType,
+        [`vik-btn-${buttonSize}`]: !!buttonSize,
+        'vik-disabled': (buttonType === 'link') && disabled
     }, className);
 
-    if (btnType === 'link' && href) {
+    if (buttonType === 'link' && href) {
         return (
             <a 
                 className={classes}
@@ -89,8 +89,8 @@ export const Button: FC<ButtonProps> = (props) => {
 // 默认属性
 Button.defaultProps = {
     disabled: false,
-    btnType: 'default',
-    size: 'large',
+    buttonType: 'default',
+    buttonSize: 'lg',
 };
 
 export default Button;

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, CSSProperties, ReactNode, FC, Children, FunctionComponentElement, cloneElement, MouseEvent,  } from 'react';
 import classNames from 'classnames';
 import { MenuContext } from '../index';
 import { IMenuItemProps } from '../MenuItem';
@@ -12,11 +12,11 @@ export interface ISubMenuProps {
     index?: string,
     title: string,
     className?: string,
-    style?: React.CSSProperties,
-    children?: React.ReactNode; // 可以传多个内容
+    style?: CSSProperties,
+    children?: ReactNode; // 可以传多个内容
 }
 
-const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, children }) => {
+const SubMenu: FC<ISubMenuProps> = ({ index, title, className, style, children }) => {
 
     // 得到父组件传递的Context
     const itemContext = useContext(MenuContext);
@@ -40,14 +40,14 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
     // 校验传入的 children item 类型必须是一个 displayName === 'Item' 类型
     const renderChildren = (children) => {
         // 使用 React 提供的Children map 遍历
-        const childrenComponent = React.Children.map(children, (child, i) => {
+        const childrenComponent = Children.map(children, (child, i) => {
             // 类型断言
-            const childElement = child as React.FunctionComponentElement<IMenuItemProps>;
+            const childElement = child as FunctionComponentElement<IMenuItemProps>;
             const { displayName } = childElement.type;
             if (displayName === 'MenuItem') {
                 // 自动给子组件添加 index 属性，使用React  React.cloneElement() 方法
                 // 自动添加index
-                return React.cloneElement(childElement, { index: `${index.toString()}-${i}` }); // 使用父组件的索引加子组件的索引
+                return cloneElement(childElement, { index: `${index.toString()}-${i}` }); // 使用父组件的索引加子组件的索引
             } else {
                 console.error('waring: Menu has a child whild which is not a MenuItem');
             }
@@ -92,13 +92,13 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
     }
 
     // 点击title展开
-    const handleClick = (e: React.MouseEvent) => {
+    const handleClick = (e: MouseEvent) => {
         e.preventDefault();
         setMenuOpen(!menuOpen);
     }
     // 鼠标悬停显示和隐藏
     let timer: any;
-    const handleMouse = (e: React.MouseEvent, toggle: boolean) => {
+    const handleMouse = (e: MouseEvent, toggle: boolean) => {
         if (timer) {
             clearTimeout(timer);
         }
@@ -115,8 +115,8 @@ const SubMenu: React.FC<ISubMenuProps> = ({ index, title, className, style, chil
     } : {};
     // 2.悬停事件
     const hoveEvent = itemContext.mode !== 'vertical' ? {
-        onMouseEnter: (e: React.MouseEvent) => { handleMouse(e, true) },
-        onMouseLeave: (e: React.MouseEvent) => { handleMouse(e, false) },
+        onMouseEnter: (e: MouseEvent) => { handleMouse(e, true) },
+        onMouseLeave: (e: MouseEvent) => { handleMouse(e, false) },
     } : {};
 
     return (

@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { Component, createContext, FunctionComponentElement, Children, cloneElement, CSSProperties, ReactNode } from 'react';
 import classNames from 'classnames';
 import MenuItem, { IMenuItemProps } from './MenuItem';
 import SubMenu from './SubMenu';
 import './index.scss';
 
 // 定义类型
-type MenuMode = 'horizontal' | 'vertical'; // 横向 | 纵向
-type SelectCallback = (selectedIndex: string) => void; // 抽象Callback 
+export type mode = 'horizontal' | 'vertical'; // 横向 | 纵向
+export type SelectCallback = (selectedIndex: string) => void; // 抽象Callback 
 
 // 定义 props 属性约束
 export interface IMenuProps {
     defaultIndex?: string;
     className?: string;
-    mode?: MenuMode;
-    style?: React.CSSProperties;
+    mode?: mode;
+    style?: CSSProperties;
     onSelect?: SelectCallback;
     // children?: React.ReactChild;
-    children?: React.ReactNode; // 可以传多个内容
+    children?: ReactNode; // 可以传多个内容
     defaultOpenSubMenus?: string[], // 默认展开
 };
 
@@ -29,17 +29,17 @@ export interface IMenuState {
 export interface IMenuContext {
     index: string,
     onSelect?: SelectCallback,
-    mode?: MenuMode;
+    mode?: mode;
     defaultOpenSubMenus?: string[], // 默认展开，向下传递
 };
 
 // 定义父 MenuContext实例, 并设置初始默认值
-export const MenuContext = React.createContext<IMenuContext>({
+export const MenuContext = createContext<IMenuContext>({
     index: '0',
     onSelect: () => {},
 });
 
-class Menu extends React.Component<IMenuProps, IMenuState>{
+export class Menu extends Component<IMenuProps, IMenuState>{
     constructor(props) {
         super(props);
         const {
@@ -98,15 +98,15 @@ class Menu extends React.Component<IMenuProps, IMenuState>{
 
         // 校验传入的 children item 类型必须是一个 displayName === 'Item' 类型
         const renderChildren = (children) => {
-            return React.Children.map(children, (child, index) => {
+            return Children.map(children, (child, index) => {
                 // 类型断言
-                const childElement = child as React.FunctionComponentElement<IMenuItemProps>;
+                const childElement = child as FunctionComponentElement<IMenuItemProps>;
                 const { displayName } = childElement.type;
                 // 子元素可能是 MenuItem， 也可能是 SubMenu
                 if (displayName === 'MenuItem' || displayName === 'SubMenu') {
                     // 自动给子组件添加 index 属性，使用React  React.cloneElement() 方法
                     // 自动添加index
-                    return React.cloneElement(childElement, { index: index.toString() }); 
+                    return cloneElement(childElement, { index: index.toString() }); 
                 } else {
                     console.error('waring: Menu has a child whild which is not a MenuItem');
                 }

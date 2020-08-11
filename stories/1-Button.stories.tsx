@@ -39,23 +39,23 @@ DefaultButton.story = {
 };
 
 export const ButtonWithSize = () => (
-  <>
-    <Button onClick={action('clicked')} size="lg">lg Button</Button>
-    <Button onClick={action('clicked')} size="ml">ml Button</Button>
-    <Button onClick={action('clicked')} size="sm">sm Button</Button>
-  </>
+  <React.Fragment>
+    <Button onClick={action('clicked')} buttonSize="lg">lg Button</Button>
+    <Button onClick={action('clicked')} buttonSize="ml">ml Button</Button>
+    <Button onClick={action('clicked')} buttonSize="sm">sm Button</Button>
+  </React.Fragment>
 );
 ButtonWithSize.story = {
   name: '不同大小按钮',
 };
 
 export const ButtonWithType = () => (
-  <>
-    <Button onClick={action('clicked')} btnType="primary">primary Button</Button>
-    <Button onClick={action('clicked')} btnType="default">default Button</Button>
-    <Button onClick={action('clicked')} btnType="danger">danger Button</Button>
-    <Button onClick={action('clicked')} btnType="link" href="#">link Button</Button>
-  </>
+  <React.Fragment>
+    <Button onClick={action('clicked')} buttonType="primary">primary Button</Button>
+    <Button onClick={action('clicked')} buttonType="default">default Button</Button>
+    <Button onClick={action('clicked')} buttonType="danger">danger Button</Button>
+    <Button onClick={action('clicked')} buttonType="link" href="#">link Button</Button>
+  </React.Fragment>
 );
 ButtonWithType.story = {
   name: '不同类型按钮',
