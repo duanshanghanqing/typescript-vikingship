@@ -1,4 +1,4 @@
-import React, { useContext, FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react';
+import React, { useContext, FC, ButtonHTMLAttributes, AnchorHTMLAttributes, ReactChild } from 'react';
 import classNames from 'classnames';
 import { ConfigContext } from '../ConfigProvider';
 // import './index.less';
@@ -30,7 +30,7 @@ export interface BaseButtonProps {
     buttonSize?: buttonSize;
     /**设置 Button 类型*/
     buttonType?: buttonType;
-    children: React.ReactChild;
+    children: ReactChild;
     href?: string;
 };
 
