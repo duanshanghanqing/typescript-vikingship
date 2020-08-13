@@ -4,6 +4,7 @@ import Buttons from '../views/Buttons';
 import Menus from '../views/Menus';
 import Icon from '../views/Icon';
 import Transition from '../views/Transition';
+import Upload from '../views/Upload';
 
 export default [
   {
@@ -33,6 +34,11 @@ export default [
         path: '/transition',
         exact: true,
         component: Transition,
+      },
+      {
+        path: '/upload',
+        exact: true,
+        component: Upload,
       },
     ],
   },

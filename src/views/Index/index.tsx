@@ -20,6 +20,7 @@ class Index extends React.Component {
             <li><Link to="/menus">Menu</Link></li>
             <li><Link to="/icon">icon</Link></li>
             <li><Link to="/transition">Transition</Link></li>
+            <li><Link to="/upload">Upload</Link></li>
           </ul>
       </div>
     );
