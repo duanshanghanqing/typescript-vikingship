@@ -2,23 +2,25 @@ import React, { FC, useRef, ChangeEvent } from 'react';
 import { Button } from '../index';
 import axios from 'axios';
 
+
+
 export interface UploadProps {
     //  input accept Attribute
     accept?: string;
     // 上传地址
     action: string;
     // 上传请求的 http method
-    method: string;
+    method?: string;
     // 支持上传文件夹
-    directory: boolean;
+    directory?: boolean;
     //多文件上传
-    multiple: boolean;
+    multiple?: boolean;
     // 上传进度
     onProgress?: (percentage: number, file: File) => void;
-    // 上传成功
-    onSuccess?: (data: any, file: File) => void;
-    // 上传错误
-    onError?: (err: any, file: File) => void;
+    // 每上传一次，触发一下 ，返回当前上传成功或失败的文件信息，和全部文件信息
+    onChang?: (info: any, error: any, fileDataList: any[]) => void;
+    // 上传结束
+    onEnd?: (fileDataList: any[]) => void;
 }
 
 const Upload: FC<UploadProps> = (props) => {
@@ -28,8 +30,8 @@ const Upload: FC<UploadProps> = (props) => {
         directory,
         multiple,
         onProgress,
-        onSuccess,
-        onError,
+        onChang,
+        onEnd,
     } = props;
 
     const handleFileChang = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,40 +39,44 @@ const Upload: FC<UploadProps> = (props) => {
         if (!files) {
             return;
         }
-        uploadFiles(files);
-    }
 
-    const uploadFiles = async (files: FileList) => {
-
+        const fileDataList = [];
+ 
         let index: number = 0;
-        function upload(file: File) {
+        async function upload(file: File) {
             const formData = new FormData();
             formData.append('file', file);
-            axios.post('https://www.mocky.io/v2/5cc8019d300000980a055e76', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                onUploadProgress: () => {
-                    
-                }
-            }).then((res) => {
-
-            }).catch(() => {
-
-            }).finally(() => {
+            try {
+                const { data } = await axios.post('https://www.mocky.io/v2/5cc8019d300000980a055e76', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    onUploadProgress: (e) => {
+                        let percentage = Math.round((e.loaded * 100 / e.total) / e.total) || 0;
+                        if (percentage < 100) {
+                            onProgress && onProgress(percentage, file);
+                        }
+                    }
+                });
+                const info = data;
+                fileDataList.push({ info });
+                onChang && onChang(info, null, fileDataList);
+            } catch (error) {
+                fileDataList.push({ error });
+                onChang && onChang(null, error, fileDataList);
+            } finally {
                 index++;
                 if (index < files.length) {
                     upload(files[index]);
                 }
                 // 结束
                 if (index === files.length) {
-
+                    onEnd && onEnd(fileDataList);
                 }
-            });
+            }
         }
 
         upload(files[index]);
-
     }
 
     // 获取input节点
@@ -83,15 +89,19 @@ const Upload: FC<UploadProps> = (props) => {
         fileInput.current.setAttribute('directory', '');
     }
 
+    const buttonClick = () => {
+        fileInput.current.click();
+    }
+
     return (
         <>
-            <Button onClick={fileInput.current.click}>选择文件</Button>
+            <Button onClick={buttonClick}>选择文件</Button>
             <input
                 type="file"
                 style={{ display: 'none' }}
                 ref={fileInput}
                 onChange={handleFileChang}
-                // webkitdirectory={true}
+                accept={action}
                 multiple={multiple}
             />
         </>

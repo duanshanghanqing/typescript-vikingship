@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import axios from 'axios';
+import { Upload } from '../../components';
 
-const Upload: FC = () => {
+const _Upload: FC = () => {
 
     const handleFileChang = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { files } = e.target;
@@ -22,9 +23,23 @@ const Upload: FC = () => {
 
     return (
         <div>
-            <input type="file" name="myFile" onChange={handleFileChang}/>
+            <input type="file" name="myFile" onChange={handleFileChang} />
+            <br />
+            <Upload 
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                multiple={true}
+                onProgress={(percentage, file) => {
+                    console.log(percentage, file);
+                }}
+                onChang={(fileData, fileDataList) => {
+                    console.log(fileData, fileDataList);
+                }}
+                onEnd={(fileDataList) => {
+                    console.log(fileDataList);
+                }}
+            />
         </div>
     );
 }
 
-export default Upload;
+export default _Upload;

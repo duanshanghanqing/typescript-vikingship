@@ -9,3 +9,5 @@ export { default as Icon } from './Icon';
 export { default as Transition } from './Transition';
 
 export { default as Input } from './Input';
+
+export { default as Upload } from './Upload';
