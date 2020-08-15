@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import axios from 'axios';
-import { Upload } from '../../components';
+import { Upload, Button } from '../../components';
 
 const _Upload: FC = () => {
 
@@ -25,19 +25,37 @@ const _Upload: FC = () => {
         <div>
             <input type="file" name="myFile" onChange={handleFileChang} />
             <br />
-            <Upload 
+            <Upload
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 multiple={true}
                 onProgress={(percentage, file) => {
                     console.log(percentage, file);
                 }}
-                onChang={(fileData, fileDataList) => {
-                    console.log(fileData, fileDataList);
+                onChang={(info, err, fileDataList) => {
+                    console.log(info, err, fileDataList);
                 }}
-                onEnd={(fileDataList) => {
-                    console.log(fileDataList);
+                beforeUpload={(file) => {
+                    // 上传前检测文件大小
+                    // const kb = Math.round(file.size / 1024);
+                    // if (kb > 100) {
+                    //     console.warn('文件不能大于100kb');
+                    //     return false;
+                    // }
+                    // return true;
+
+                    return new Promise((resolve, reject) => {
+                        const kb = Math.round(file.size / 1024);
+                        if (kb > 100) {
+                            console.warn('文件不能大于100kb');
+                            reject('文件不能大于100kb');
+                        } else {
+                            resolve(file);
+                        }
+                    });
                 }}
-            />
+            >
+                <Button>选择文件</Button>
+            </Upload>
         </div>
     );
 }
