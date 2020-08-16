@@ -1,6 +1,8 @@
 import React, { FC, useRef, ChangeEvent, ReactNode, useState, Component } from 'react';
 import axios from 'axios';
 import UploadList from './UploadList';
+import Dragger from './Dragger';
+import './index.scss';
 
 // 文件上传状态
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error';
@@ -33,7 +35,7 @@ export interface UploadProps {
     // 上传请求的 http method
     method?: string;
     // data 请求扩展的参数
-    data?: object;
+    data?: { [key: string]: any };
     // 支持上传文件夹
     directory?: boolean;
     //多文件上传
@@ -50,6 +52,14 @@ export interface UploadProps {
     defaultFileList?: any[];
     // 点击删除后的回调
     onRemove?: (fileListItem: UploadFile) => void;
+    // 添加头信息
+    headers?: { [key: string]: any };
+    // 名称
+    name?: string;
+    // 当前请求为跨域类型时是否在请求中协带cookie。
+    withCredentials?: boolean;
+    // 是否开启拖动上传
+    drag?: boolean;
 }
 
 export const Upload: FC<UploadProps> = (props) => {
@@ -65,6 +75,10 @@ export const Upload: FC<UploadProps> = (props) => {
         beforeUpload,
         defaultFileList,
         onRemove,
+        headers,
+        name,
+        withCredentials,
+        drag,
     } = props;
 
     const [fileList, setFileList] = useState<UploadFile[]>([...defaultFileList]);
@@ -108,10 +122,13 @@ export const Upload: FC<UploadProps> = (props) => {
             percent: 0,
             raw: file,
         }
-        setFileList([_file, ...fileList]);
+        // setFileList([_file, ...fileList]);
+        setFileList(prevList => {
+            return [_file, ...prevList];
+        });
 
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append(name, file);
         if (data) {
             Object.keys(data).forEach((key) => {
                 formData.append(key, data[key]);
@@ -124,8 +141,10 @@ export const Upload: FC<UploadProps> = (props) => {
 
         reqMethod(action, formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                ...headers,
             },
+            withCredentials, // 当前请求为跨域类型时是否在请求中协带cookie。
             onUploadProgress: (e) => {
                 // 正在上传
                 let percent = Math.round(e.loaded / e.total * 100);
@@ -155,15 +174,11 @@ export const Upload: FC<UploadProps> = (props) => {
         });
     }
 
-    const handleFileChang = (e: ChangeEvent<HTMLInputElement>) => {
-        if (!e.target.files) {
-            return;
-        }
+    const toUploadFiles = (files: FileList) => {
         // 文件数组转化成数组
-        const files = Array.from(e.target.files);
-
+        const _files = Array.from(files);
         // 并发上传
-        files.forEach((file) => {
+        _files.forEach((file) => {
             if (!beforeUpload) {
                 upload(file);
             } else {
@@ -181,6 +196,13 @@ export const Upload: FC<UploadProps> = (props) => {
                 }
             }
         });
+    }
+
+    const handleFileChang = (e: ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files) {
+            return;
+        }
+        toUploadFiles(e.target.files);
     }
 
     // 获取input节点
@@ -208,10 +230,12 @@ export const Upload: FC<UploadProps> = (props) => {
     }
 
     return (
-        <>
-            <span onClick={buttonClick}>
-                {children}
-            </span>
+        <div className="viking-upload-component">
+            <div onClick={buttonClick} style={{ display: 'inline-block' }}>
+                {
+                    drag ? <Dragger onFile={(files) => { toUploadFiles(files) }} /> : children
+                }
+            </div>
             <input
                 type="file"
                 style={{ display: 'none' }}
@@ -220,20 +244,22 @@ export const Upload: FC<UploadProps> = (props) => {
                 accept={action}
                 multiple={multiple}
             />
-            <UploadList 
+            <UploadList
                 fileList={fileList}
                 onRemove={handleRemove}
             />
-        </>
+        </div>
     );
 }
 
 Upload.defaultProps = {
     accept: '',
     method: 'post',
+    name: 'file',
     directory: false,
     multiple: false,
     defaultFileList: [],
+    drag: false,
 }
 
 export default Upload;

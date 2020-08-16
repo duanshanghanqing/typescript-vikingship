@@ -35,6 +35,7 @@ const _Upload: FC = () => {
                 defaultFileList={defaultFileList}
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 multiple={true}
+                drag={true}
                 onProgress={(percentage, file) => {
                     console.log(percentage, file);
                 }}
