@@ -21,11 +21,18 @@ const _Upload: FC = () => {
         }
     }
 
+    const defaultFileList = [
+    //   { uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 30 },
+      { uid: '122', size: 1234, name: 'xyz.md', status: 'success', percent: 30 },
+      { uid: '121', size: 1234, name: 'eyiha.md', status: 'error', percent: 30 }
+    ]
+
     return (
         <div>
             <input type="file" name="myFile" onChange={handleFileChang} />
             <br />
             <Upload
+                defaultFileList={defaultFileList}
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 multiple={true}
                 onProgress={(percentage, file) => {
@@ -45,7 +52,7 @@ const _Upload: FC = () => {
 
                     return new Promise((resolve, reject) => {
                         const kb = Math.round(file.size / 1024);
-                        if (kb > 100) {
+                        if (kb > 10000000) {
                             console.warn('文件不能大于100kb');
                             reject('文件不能大于100kb');
                         } else {

@@ -1,5 +1,6 @@
-import React, { FC, useRef, ChangeEvent, ReactNode, useState } from 'react';
+import React, { FC, useRef, ChangeEvent, ReactNode, useState, Component } from 'react';
 import axios from 'axios';
+import UploadList from './UploadList';
 
 // 文件上传状态
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error';
@@ -46,12 +47,12 @@ export interface UploadProps {
     // 上传前的钩子
     beforeUpload?: (file: File) => boolean | Promise<File>;
     // 默认要展示的文件列表
-    defaultFileList?: UploadFile[];
+    defaultFileList?: any[];
     // 点击删除后的回调
-    onRemove?: (fileListItem: UploadFile) => boolean | Promise<File>;
+    onRemove?: (fileListItem: UploadFile) => void;
 }
 
-const Upload: FC<UploadProps> = (props) => {
+export const Upload: FC<UploadProps> = (props) => {
     const {
         action,
         method,
@@ -198,6 +199,14 @@ const Upload: FC<UploadProps> = (props) => {
         }
     }
     console.log(fileList);
+
+    const handleRemove = (fileListItem: UploadFile) => {
+        setFileList((prevList) => {
+            return prevList.filter((_fileListItem) => _fileListItem.uid !== fileListItem.uid);
+        });
+        onRemove && onRemove(fileListItem);
+    }
+
     return (
         <>
             <span onClick={buttonClick}>
@@ -211,6 +220,10 @@ const Upload: FC<UploadProps> = (props) => {
                 accept={action}
                 multiple={multiple}
             />
+            <UploadList 
+                fileList={fileList}
+                onRemove={handleRemove}
+            />
         </>
     );
 }
@@ -220,6 +233,8 @@ Upload.defaultProps = {
     method: 'post',
     directory: false,
     multiple: false,
+    defaultFileList: [],
 }
 
 export default Upload;
+

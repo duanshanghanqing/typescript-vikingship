@@ -11,3 +11,5 @@ export { default as Transition } from './Transition';
 export { default as Input } from './Input';
 
 export { default as Upload } from './Upload';
+
+export { default as Progress } from './Progress';
