@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "module": "esnext", // 模式
+        "target": "es5",// 编译目标js版本
+        "jsx": "react",// 支持react jsx
+        "declaration": true, // 获取ts类型提升和检查，并生成类型 .t 文件
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "allowSyntheticDefaultImports": true, // 允许使用 ES2015 默认的 import 风格
+        "esModuleInterop": true, // 可调用的CommonJS模块必须被做为默认导入，在已有的“老式”模块模式之间保证最佳的互通性
+        "moduleResolution": "node", // 支持node模块化
+        "allowJs": true, // 运行使用js
+        "resolveJsonModule": true, // 支持解析倒入json模块
+    },
+    "include": [ // 需要编译的文件
+        "src/components",
+        "locale"
+    ],
+    "exclude": [ // 不需要编译的文件
+        // ...
+    ],
+    "compileOnSave": false
+}

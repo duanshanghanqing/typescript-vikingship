@@ -10,6 +10,8 @@
     "rm": "rimraf dist",
     "lint": "tslint --project tsconfig.json --format codeFrame",
     "test": "jest",
+    "build-ts": "tsc -p tsconfig.build.json",
+    "build-css": "node-scss ./src/components/**/*.scss ./dist/index.css",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

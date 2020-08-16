@@ -99,7 +99,7 @@
                 <Button>Hello Button</Button>
             );
 
-# 安装  @storybook/addon-info 插件,用于展示组件的使用文档源码
+## 安装  @storybook/addon-info 插件,用于展示组件的使用文档源码
 
     https://github.com/storybookjs/storybook/tree/master/addons/info
     https://developer.aliyun.com/mirror/npm/package/@types/storybook__addon-info
@@ -145,3 +145,7 @@
 
         组件也要这样导出
         export const Button: FC<ButtonProps> = (props) => {
+
+## 打包
+
+    ts files.tsx -> es6 modules.jsx -> 入口文件引用余姚的文件 index.tsx -> module bundler webpack.rollup -> 浏览器执行的js
