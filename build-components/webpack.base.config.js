@@ -1,13 +1,27 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const webpackbaseconfig = require('./webpack.base.config');
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');// 独立打包css
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'); //压缩css
-module.exports = merge(webpackbaseconfig, {
-    mode: 'production',
-    devtool: 'none',
+module.exports = {
+    entry: path.join(__dirname, '..', 'src', 'components_1', 'index'),
+    output: {
+        path: path.join(__dirname, '..', 'dist'),
+        publicPath: '/',
+        filename: 'index.js',
+        // filename: "MyLibrary.[name].js",
+		library: "vikingship",
+        libraryTarget: "umd",
+    },
+    externals: {
+        // 'react': 'React',
+    },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js'],
+    },
     module: {
         rules: [
+            { 
+                test: /\.tsx?$/, 
+                loader: 'ts-loader' 
+            },
             {
                 test: /\.css$/,
                 use: [
@@ -78,14 +92,9 @@ module.exports = merge(webpackbaseconfig, {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: 'css/[name]-[hash].css',
-            chunkFilename: 'css/[id]-[hash].css'
+            // filename: 'css/[name]-[hash].css',
+            // chunkFilename: 'css/[id]-[hash].css'
+            filename: 'index.css',
         }),
-        new OptimizeCssAssetsPlugin(),
-        new webpack.DefinePlugin({
-            'process.env': {
-                ENV: '"production"'
-            }
-        })
     ]
-});
+};
