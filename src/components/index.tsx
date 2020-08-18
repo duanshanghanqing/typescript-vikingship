@@ -1,4 +1,14 @@
-// 中转导出
+// import React from 'react';
+// import './index.scss';
+
+// export class Vik extends React.Component{
+//     render() {
+//         return (
+//             <div className="vik">vik</div>
+//         );
+//     }
+// }
+
 export { default as ConfigProvider } from './ConfigProvider';
 
 export { default as Button } from './Button';

@@ -2,7 +2,7 @@ import React, { useContext, useState, CSSProperties, ReactNode, FC, Children, Fu
 import classNames from 'classnames';
 import { MenuContext } from '../index';
 import { IMenuItemProps } from '../MenuItem';
-import { Icon } from '../../../components';
+import { Icon } from '../../Icon';
 // import { CSSTransition } from 'react-transition-group';
 // import './index.scss';
 // 修改为如下

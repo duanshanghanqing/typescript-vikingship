@@ -5,8 +5,8 @@ interface Iprops {
 }
 
 interface Istate {
-    showLeft: boolean,
-    showTop: boolean,
+    showLeft: boolean;
+    showTop: boolean;
 }
 
 class Index extends React.Component<Iprops, Istate> {

@@ -1,17 +1,15 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');// 独立打包css
 module.exports = {
-    entry: path.join(__dirname, '..', 'src', 'components_1', 'index'),
+    entry: path.join(__dirname, '..', 'src', 'components', 'index'),
     output: {
-        path: path.join(__dirname, '..', 'dist'),
+        path: path.join(__dirname, '..', 'lib'),
         publicPath: '/',
-        filename: 'index.js',
-        // filename: "MyLibrary.[name].js",
 		library: "vikingship",
         libraryTarget: "umd",
     },
     externals: {
-        // 'react': 'React',
+        'react': 'React',
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
@@ -88,13 +86,4 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
-            // filename: 'css/[name]-[hash].css',
-            // chunkFilename: 'css/[id]-[hash].css'
-            filename: 'index.css',
-        }),
-    ]
 };

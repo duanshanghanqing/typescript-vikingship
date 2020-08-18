@@ -12,7 +12,7 @@ interface ConfigProviderProps {
     locale?: any
 };
 
-const ConfigProvider: React.FC<ConfigProviderProps> = (props) => {
+export const ConfigProvider: React.FC<ConfigProviderProps> = (props) => {
     const {
         children,
         locale,

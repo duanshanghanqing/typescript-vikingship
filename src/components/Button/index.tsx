@@ -1,6 +1,6 @@
 import React, { useContext, FC, ButtonHTMLAttributes, AnchorHTMLAttributes, ReactChild } from 'react';
 import classNames from 'classnames';
-import { ConfigContext } from '../ConfigProvider';
+// import { ConfigContext } from '../ConfigProvider';
 // import './index.less';
 import './index.scss';
 
@@ -73,7 +73,7 @@ export const Button: FC<ButtonProps> = (props) => {
         );
     }
 
-    const config = useContext(ConfigContext);
+    // const config = useContext(ConfigContext);
 
     return (
         <button 
