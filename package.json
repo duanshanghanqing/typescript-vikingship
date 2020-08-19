@@ -1,8 +1,12 @@
 {
   "name": "typescript-vikingship",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "react components library",
+  "author": "junfeng.gao",
+  "preview": false,
   "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.js",
   "scripts": {
     "start": "webpack-dev-server --config ./build/webpack.dev.server.config.js",
     "build:dev": "npm run rm && webpack --config ./build/webpack.dev.config.js",
@@ -16,11 +20,38 @@
     "test": "jest",
     "build-ts": "tsc -p tsconfig.build.json",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepublish": "npm run build-lib"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "UI",
+    "React"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/duanshanghanqing/typescript-vikingship",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/duanshanghanqing/typescript-vikingship"
+  },
+  "files": [
+    "lib"
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
@@ -28,8 +59,6 @@
     "@types/react-transition-group": "^4.4.0",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "react-mixin": "^5.0.0",
     "react-redux": "^7.2.0",
     "react-router-config": "^5.1.1",
@@ -39,6 +68,8 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "@babel/core": "^7.11.1",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-info": "^5.3.19",

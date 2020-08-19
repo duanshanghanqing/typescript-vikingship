@@ -149,3 +149,53 @@
 ## 打包
 
     ts files.tsx -> es6 modules.jsx -> 入口文件引用余姚的文件 index.tsx -> module bundler webpack.rollup -> 浏览器执行的js
+    
+    package.json
+        "main": "lib/index.js",
+        scripts
+            "build-lib:dev": "webpack --config ./build-lib/webpack.dev.config.js",
+            "build-lib:prod": "webpack --config ./build-lib/webpack.prod.config.js",
+            "build-lib": "npm run rm-lib && npm run build-lib:dev && npm run build-lib:prod",
+            "rm-lib": "rimraf lib",
+
+## 本地使用
+
+    当前项目执行
+        npm link    创建一个全局的短链接，链接到当前项目目录
+
+    使用项目执行
+        npm link typescript-vikingship      引用这个短链接
+
+## 发布包
+
+    注册账号
+        npm  whoami 检查是否登陆
+        npm adduser 创建账号
+        npm login   登陆账号
+
+    package.json
+        "prepublish": "npm run build-lib"
+
+    npm run prepublish  发布包
+
+## 注意事项
+    解决用户安装我们的包时安装了两份react和react-dom库
+
+    用户在安装时，该处声明的依赖不会被安装
+    "peerDependencies": {
+        "react": ">=16.8.0",
+        "react-dom": ">=16.8.0"
+    },
+
+    删除 dependencies 内的两个依赖
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+
+    然而开发时还要使用，所以将删除的引用，重新添加到devDependencies中
+    "devDependencies": {
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+    }
+
+
+    
