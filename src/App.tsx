@@ -6,7 +6,7 @@ import configureStore from './store/configureStore';
 import routes from './routes';
 import { ConfigProvider } from './components';
 import { zh_CN } from '../locale';
-
+import '../lib/index.css';
 const store = configureStore();
 
 class App extends React.Component {
