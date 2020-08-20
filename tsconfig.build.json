@@ -1,11 +1,12 @@
 {
     "compilerOptions": {
-        "outDir": "./dist/",
+        "outDir": "./lib/",
         "sourceMap": true,
         "module": "esnext", // 模式
         "target": "es5",// 编译目标js版本
         "jsx": "react",// 支持react jsx
-        "declaration": true, // 获取ts类型提升和检查，并生成类型 .t 文件
+        "declaration": true,// 是否生成声明文件
+        "declarationDir": "./lib/",// 声明文件打包的位置
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "allowSyntheticDefaultImports": true, // 允许使用 ES2015 默认的 import 风格

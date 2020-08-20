@@ -6,7 +6,7 @@
   "preview": false,
   "main": "lib/index.js",
   "module": "lib/index.js",
-  "types": "lib/index.d.js",
+  "types": "lib/src/components/index.d.ts",
   "scripts": {
     "start": "webpack-dev-server --config ./build/webpack.dev.server.config.js",
     "build:dev": "npm run rm && webpack --config ./build/webpack.dev.config.js",

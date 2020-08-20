@@ -5,7 +5,6 @@
         "module": "esnext", // 模式
         "target": "es5",
         "jsx": "react",
-        "declaration": true,// 是否生成声明文件
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "allowSyntheticDefaultImports": true, // 允许使用 ES2015 默认的 import 风格
