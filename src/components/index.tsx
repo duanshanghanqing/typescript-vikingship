@@ -24,5 +24,3 @@ export { default as Input } from './Input';
 export { default as Upload } from './Upload';
 
 export { default as Progress } from './Progress';
-
-export { default as MyTest } from './MyTest';

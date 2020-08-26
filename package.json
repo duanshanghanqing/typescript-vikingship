@@ -68,8 +68,6 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "@babel/core": "^7.11.1",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-info": "^5.3.19",
@@ -91,6 +89,7 @@
     "file-loader": "^6.0.0",
     "firebase-functions-test": "^0.2.1",
     "html-webpack-plugin": "^4.3.0",
+    "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.1.0",
     "less": "^3.11.3",
@@ -99,7 +98,9 @@
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
+    "react": "^16.13.1",
     "react-docgen-typescript-loader": "^3.7.2",
+    "react-dom": "^16.13.1",
     "rimraf": "^3.0.2",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
@@ -114,5 +115,10 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
