@@ -10,7 +10,7 @@ module.exports = {
     },
     externals: {
         'react': 'react',
-        // 'react-dom': 'react-dom',
+        'react-dom': 'react-dom',
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
