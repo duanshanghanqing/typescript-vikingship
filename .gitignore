@@ -4,6 +4,7 @@
 /node_modules
 /dist
 /lib
+/storybook-static
 
 # testing
 /coverage

@@ -195,7 +195,13 @@
     
     // 发布前执行
     package.json
-        "prepublishOnly": "npm run build-lib"
+        "scripts": {
+            // "prepublish": "npm run build-lib" // 即将废弃
+            "prepublishOnly": "npm run build-lib" // 发布前要做的事
+        }
+        "files": [      // 表示要把哪些资源上传到npm仓库上去，不写默认使用 .gitignore 内的信息
+            "lib"
+        ],
 
     npm prepublish  发布包
 
@@ -218,5 +224,12 @@
         "react-dom": "^16.13.1",
     }
 
+## 生成静态文档
 
-    
+    npm run build-storybook
+
+        生成 storybook-static 目录
+
+## 发布集成
+
+    https://travis-ci.com/
