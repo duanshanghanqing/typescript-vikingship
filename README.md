@@ -192,11 +192,12 @@
         npm  whoami 检查是否登陆
         npm adduser 创建账号
         npm login   登陆账号
-
+    
+    // 发布前执行
     package.json
-        "prepublish": "npm run build-lib"
+        "prepublishOnly": "npm run build-lib"
 
-    npm run prepublish  发布包
+    npm prepublish  发布包
 
 ## 注意事项
     解决用户安装我们的包时安装了两份react和react-dom库
