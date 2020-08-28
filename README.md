@@ -203,7 +203,7 @@
             "lib"
         ],
 
-    npm prepublish  发布包
+    npm publish  发布包
 
 ## 注意事项
     解决用户安装我们的包时安装了两份react和react-dom库
