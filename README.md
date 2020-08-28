@@ -166,6 +166,26 @@
     使用项目执行
         npm link typescript-vikingship      引用这个短链接
 
+    使用例子
+
+        typescript-vikingship 包项目
+            npm link
+
+        typescript-vikingship-test 使用包项目
+            npm link typescript-vikingship
+
+    会遇到一下问题
+        Invalid hook call. Hooks
+       原因是因为 typescript-vikingship-test 在使用link来的包时，被link包内使用的react是包项目内的react，和使用包项目依赖的react不是一个，所以会报警告
+
+       解决方式
+            typescript-vikingship
+                npm link ../typescript-vikingship-test/node_modules/react
+
+        这样就可以是同一个react了
+
+        https://reactjs.org/warnings/invalid-hook-call-warning.html
+
 ## 发布包
 
     注册账号
