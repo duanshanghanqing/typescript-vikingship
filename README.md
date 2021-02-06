@@ -189,7 +189,7 @@
 ## 发布包
 
     注册账号
-        npm  whoami 检查是否登陆
+        npm whoami  检查是否登陆
         npm adduser 创建账号
         npm login   登陆账号
     
